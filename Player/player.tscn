@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://xlly15dedj3l"]
+
+[ext_resource type="Script" uid="uid://y7oa0v8polrj" path="res://Player/player.gd" id="1_gwnis"]
+[ext_resource type="Texture2D" uid="uid://cykp5ht3jwxlq" path="res://Assets/DG Asha Character/Blue Asha Idle 32x32.png" id="1_l8h54"]
+[ext_resource type="Script" uid="uid://dis28afvskwxt" path="res://Common/hurt_box.gd" id="2_4ntmi"]
+[ext_resource type="Script" uid="uid://dvcyyt7vwp6ie" path="res://Common/health_component.gd" id="3_btcbx"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4ntmi"]
+radius = 9.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_btcbx"]
+radius = 11.0
+
+[node name="Player" type="CharacterBody2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_gwnis")
+
+[node name="PlayerSprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+texture = ExtResource("1_l8h54")
+hframes = 8
+vframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_4ntmi")
+
+[node name="HurtBox2D" type="Area2D" parent="."]
+script = ExtResource("2_4ntmi")
+metadata/_custom_type_script = "uid://dis28afvskwxt"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox2D"]
+shape = SubResource("CircleShape2D_btcbx")
+debug_color = Color(0.138852, 0.605918, 0.297189, 0.42)
+
+[node name="HealthComponent" type="Node2D" parent="." node_paths=PackedStringArray("hurt_box")]
+script = ExtResource("3_btcbx")
+hurt_box = NodePath("../HurtBox2D")
+metadata/_custom_type_script = "uid://dvcyyt7vwp6ie"

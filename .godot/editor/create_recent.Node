@@ -1,0 +1,8 @@
+HealthComponent
+CollisionShape2D
+HitBox2D
+HurtBox2D
+Sprite2D
+AnimatedSprite2D
+CharacterBody2D
+Node

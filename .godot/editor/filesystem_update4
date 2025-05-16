@@ -1,0 +1,6 @@
+res://Player/player.tscn
+res://Common/health_component.gd
+res://Common/state_machine.gd
+res://Player/player.gd
+res://Player/state_machine.gd
+res://Levels/level.tscn
