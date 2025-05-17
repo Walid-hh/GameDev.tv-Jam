@@ -2,7 +2,8 @@ class_name PlayerFSM extends Node
 
 enum Events {
 	NONE,
-	FINISHED
+	FINISHED,
+	COMBAT_STARTED
 }
 
 class StateMachine extends Node:
@@ -19,11 +20,11 @@ class StateMachine extends Node:
 		is_debugging = new_value
 		if (
 			current_state != null and
-			current_state.mob != null and 
-			current_state.mob.debug_label != null
+			current_state.player != null and 
+			current_state.player.debug_label != null
 		) :
-			current_state.mob.debug_label.text = current_state.name
-			current_state.mob.debug_label.visible = is_debugging
+			current_state.player.debug_label.text = current_state.name
+			current_state.player.debug_label.visible = is_debugging
 
 	func set_transitions(new_transitions: Dictionary) -> void:
 		transitions = new_transitions
@@ -84,8 +85,8 @@ class StateMachine extends Node:
 		current_state = new_state
 		current_state.finished.connect(_on_state_finished.bind(current_state))
 		current_state.enter()
-		if is_debugging and current_state.mob.debug_label != null :
-			current_state.mob.debug_label.text = current_state.name
+		if is_debugging and current_state.player.debug_label != null :
+			current_state.player.debug_label.text = current_state.name
 
 	func _on_state_finished(finished_state: State) -> void:
 		assert(
@@ -109,7 +110,7 @@ class State extends RefCounted:
 
 	## Display name of the state, for debugging purposes.
 	var name := "State"
-	## Reference to the mob that the state controls.
+	## Reference to the player that the state controls.
 	var player: Player = null
 
 
@@ -134,21 +135,49 @@ class State extends RefCounted:
 	## to clean up the state.
 	func exit() -> void:
 		pass
+	
 
-class StateMoveinWorld extends State :
+
+class StateSafe extends State :
 	
 	var speed := 0
 
 	func _init(_init_player : Player) -> void:
-		super("Move In World" , _init_player)
+		super("Safe" , _init_player)
 	
-	##TO BE MODIFIED!!!
-	#func enter():
-		#player.player_sprite.play("")
 	
 	func update(delta) -> Events:
-		var direction := Input.get_vector("move_left" , "move_right" ,"move_up" ,"move_down")
-		direction = direction.sign().normalized()
-		player.velocity = direction * speed
-		player.move_and_slide()
+		var direction : Vector2
+		if Input.is_action_pressed("move_up"):
+			direction = Vector2.UP
+		elif Input.is_action_pressed("move_down"):
+			direction = Vector2.DOWN
+		elif Input.is_action_pressed("move_left"):
+			direction = Vector2.LEFT
+		elif Input.is_action_pressed("move_right"):
+			direction = Vector2.RIGHT
+		if direction == Vector2.ZERO :
+			player.player_sprite.play("idle" + str(player.direction_text))
+		else:
+			direction = direction.sign()
+			player.last_direction = direction
+			player.player_sprite.play("walk" +str(player.direction_text))
+			player.velocity = direction * speed
+			player.move_and_slide()
+		return Events.NONE
+
+
+class StateCombat extends State :
+	var speed := 0
+	var weapon : Weapon
+	func _init(init_plat : Player) -> void:
+		super("Combat" , init_plat)
+	
+	func update(delta) -> Events:
+		var direction = player._combat_movement(speed)
+		if direction == Vector2.ZERO :
+			player.player_sprite.play("idle" + str(player.direction_text))
+		else :
+			player.last_direction = direction
+			player.player_sprite.play("run" +str(player.direction_text))
 		return Events.NONE

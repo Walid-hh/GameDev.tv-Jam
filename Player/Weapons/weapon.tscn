@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://67tirjwhketk"]
+
+[ext_resource type="Script" uid="uid://cx1a1whxalrh5" path="res://Player/Weapons/weapon.gd" id="1_xgcik"]
+[ext_resource type="PackedScene" uid="uid://uif4ojw374ne" path="res://Player/Projectiles/projectile.tscn" id="2_onbuj"]
+[ext_resource type="Texture2D" uid="uid://cg1euteqva02" path="res://Assets/New Items [Update]/Bow.png" id="3_s3wd2"]
+
+[node name="Weapon" type="Node2D"]
+script = ExtResource("1_xgcik")
+projectile_scene = ExtResource("2_onbuj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 2.35619
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("3_s3wd2")

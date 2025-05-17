@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dma1ihncfx645"]
+
+[ext_resource type="Script" uid="uid://cbrcneuyypafx" path="res://Tests/area_2d.gd" id="1_8xh5c"]
+[ext_resource type="PackedScene" uid="uid://xlly15dedj3l" path="res://Player/player.tscn" id="1_ts72t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8xh5c"]
+size = Vector2(116, 178)
+
+[node name="TestScene" type="Node2D"]
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(213, 70)
+script = ExtResource("1_8xh5c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(48, 21)
+shape = SubResource("RectangleShape2D_8xh5c")
+
+[node name="Player" parent="Area2D" instance=ExtResource("1_ts72t")]
+position = Vector2(-156, -2)

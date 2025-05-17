@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://uif4ojw374ne"]
+
+[ext_resource type="Script" uid="uid://b73pjjpq1p7wo" path="res://Player/Projectiles/projectile.gd" id="1_8x1mg"]
+[ext_resource type="Texture2D" uid="uid://wktkjwh57lgo" path="res://Assets/New Items [Update]/Arrow.png" id="2_kndma"]
+[ext_resource type="Script" uid="uid://cvr4ed4ss8x4c" path="res://Common/hit_box.gd" id="3_kndma"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r0d5v"]
+radius = 8.0
+
+[node name="Projectile" type="Node2D"]
+script = ExtResource("1_8x1mg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("2_kndma")
+
+[node name="HitBox2D" type="Area2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_kndma")
+metadata/_custom_type_script = "uid://cvr4ed4ss8x4c"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox2D"]
+shape = SubResource("CircleShape2D_r0d5v")

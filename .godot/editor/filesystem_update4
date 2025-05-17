@@ -1,6 +1,8 @@
-res://Player/player.tscn
-res://Common/health_component.gd
-res://Common/state_machine.gd
-res://Player/player.gd
-res://Player/state_machine.gd
+res://Player/Weapons/bow.tscn
+res://Player/Weapons/bow.gd
 res://Levels/level.tscn
+res://Player/player.tscn
+res://Tests/test_scene.tscn
+res://Player/Projectiles/projectile.tscn
+res://Player/Weapons/weapon.tscn
+res://Player/player_state_machine.gd
