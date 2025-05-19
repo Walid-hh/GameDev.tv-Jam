@@ -3,7 +3,9 @@ class_name PlayerFSM extends Node
 enum Events {
 	NONE,
 	FINISHED,
-	COMBAT_STARTED
+	COMBAT_STARTED,
+	TOOK_HIT,
+	HEALTH_DEPLETED,
 }
 
 class StateMachine extends Node:
@@ -114,7 +116,7 @@ class State extends RefCounted:
 	var player: Player = null
 
 
-	func _init(init_name: String, init_player: CharacterBody2D) -> void:
+	func _init(init_name: String, init_player: Player) -> void:
 		name = init_name
 		player = init_player
 
@@ -170,14 +172,75 @@ class StateSafe extends State :
 class StateCombat extends State :
 	var speed := 0
 	var weapon : Weapon
-	func _init(init_plat : Player) -> void:
-		super("Combat" , init_plat)
+	var is_shooting := false
+	var shot_timer := 0.0
+	
+	func _init(init_player : Player , init_weapon : Weapon) -> void:
+		super("Combat" , init_player)
+		weapon = init_weapon
 	
 	func update(delta) -> Events:
-		var direction = player._combat_movement(speed)
-		if direction == Vector2.ZERO :
+		if Input.is_action_just_pressed("shoot") and not is_shooting:
 			player.player_sprite.play("idle" + str(player.direction_text))
-		else :
-			player.last_direction = direction
-			player.player_sprite.play("run" +str(player.direction_text))
+			is_shooting = true
+			weapon.set_physics_process(true)
+			shot_timer = weapon.startup_time + 0.05
+			
+		if is_shooting:
+			shot_timer -= delta
+			if shot_timer <= 0:
+				is_shooting = false
+				# Add any code that should happen after the startup_time here
+		else:
+			var direction = player._combat_movement(speed)
+			if direction == Vector2.ZERO:
+				player.player_sprite.play("idle" + str(player.direction_text))
+			else:
+				player.last_direction = direction
+				player.player_sprite.play("run" + str(player.direction_text))
+			if Input.is_action_just_pressed("heal"):
+				## HARD CODED VALUE TO BE MODIFIED !!!!
+				if player.healing_charges > 0 :
+					player.health_component.health += 3
+					player.healing_charges -= 1
+				print(player.health_component.health)
 		return Events.NONE
+
+class StateStagger extends State :
+	
+	var knock_back_speed := 100
+	var knock_back_distance := 30
+	var player_initial_position : Vector2
+	
+	func _init(init_player : Player) -> void:
+		super("Staggered" , init_player)
+	
+	func enter():
+
+		player_initial_position = Global.player_position
+		player.player_sprite.play("hurt" + str(player.direction_text))
+		player.player_sprite.material.set_shader_parameter("is_flashing" , true)
+		player.screen_shake.material.set_shader_parameter("is_shaking" , true)
+		await player.get_tree().create_timer(0.5).timeout
+		finished.emit()
+	
+	func update(delta):
+
+		if player.global_position.distance_to(player_initial_position) < knock_back_distance :
+			player.velocity = Global.player_last_direction * knock_back_speed * -1
+		else:
+			player.velocity = Vector2.ZERO
+		player.move_and_slide()
+	
+	func exit():
+		player.player_sprite.material.set_shader_parameter("is_flashing" , false)
+		player.screen_shake.material.set_shader_parameter("is_shaking" , false)
+		player.health_component.hurt_box.hit_box_count = 0
+
+class StateDie extends State :
+	
+	func _init(init_player : Player) -> void :
+		super("die" , init_player)
+	
+	func enter():
+		player.player_sprite.play("die" + str(player.direction_text))

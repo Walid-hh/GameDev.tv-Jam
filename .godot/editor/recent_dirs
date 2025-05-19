@@ -1,7 +1,14 @@
+res://Mobs/Attacks
+res://Mobs/Attacks/Projectiles
+res://Assets/VFX
+res://Assets/Characters/Battle Sprites/Monster Pack Files/spritesheets
+res://Mobs
+res://Tests
+res://Assets
+res://Assets/DG Asha Character
+res://Common/Shaders
 res://Player/Weapons
 res://Player/Projectiles
-res://Tests
 res://Common
 res://Player
-res://Assets/DG Asha Character
 res://Levels

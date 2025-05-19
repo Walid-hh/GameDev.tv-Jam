@@ -13,7 +13,6 @@ var max_range : float  = 200.0
 func _ready() -> void:
 	_initial_position = position
 	hit_box.damage = damage
-	direction = Global.player_last_direction
 
 func _physics_process(delta: float) -> void:
 	var velocity := direction * speed

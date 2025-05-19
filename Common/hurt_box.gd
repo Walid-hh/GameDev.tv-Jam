@@ -15,7 +15,7 @@ signal took_hit(hit_box: HitBox2D)
 const DAMAGE_SOURCE_PLAYER := 0b01
 const DAMAGE_SOURCE_MOB := 0b10
 #END:const_damage_source
-
+var hit_box_count := 0
 ## Controls which damage source the hurt box can take damage from.
 ## This changes the node's collision mask so it will only collide with a matching damage source.
 #ANCHOR:var_damage_source
@@ -31,9 +31,16 @@ func _init() -> void:
 	monitoring = true
 	monitorable = true
 	area_entered.connect(func _on_area_entered(area: Area2D) -> void:
-		if area is HitBox2D:
-			took_hit.emit(area)
+		if get_parent() is Player :
+			if hit_box_count == 0 :
+				if area is HitBox2D:
+					took_hit.emit(area)
+					hit_box_count += 1
+		else :
+			if area is HitBox2D:
+					took_hit.emit(area)
 	)
+
 #END:func_init
 
 #ANCHOR:func_set_damage_source
