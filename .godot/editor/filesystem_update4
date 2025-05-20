@@ -1,6 +1,8 @@
 res://Levels/level.tscn
 res://Common/Shaders/stagger.gdshader
+res://Common/Themes/game_theme.tres
 res://Common/Shaders/screen_shake.gdshader
+res://Common/Shaders/fire_trail.gdshader
 res://Player/player.tscn
 res://Tests/test_scene.tscn
 res://Player/Projectiles/projectile.tscn
@@ -8,11 +10,12 @@ res://Player/Weapons/weapon.tscn
 res://Player/Weapons/bow.tscn
 res://Tests/battle_ground.tscn
 res://Mobs/mob_base.tscn
-res://Mobs/mob_witch.tscn
+res://Mobs/Witch/mob_witch.tscn
 res://Mobs/Attacks/Projectiles/Fire.tscn
 res://Mobs/Attacks/circular_attack.tscn
-res://Mobs/Attacks/circular_attack.gd
+res://Mobs/Attacks/aoe_attack.tscn
+res://Mobs/Witch/witch_states.gd
+res://Mobs/mob_base.gd
 res://Player/player.gd
-res://Common/health_component.gd
 res://Player/player_state_machine.gd
-res://Common/hurt_box.gd
+res://Common/Scripts/health_component.gd

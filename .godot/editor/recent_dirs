@@ -1,12 +1,13 @@
-res://Mobs/Attacks
-res://Mobs/Attacks/Projectiles
-res://Assets/VFX
-res://Assets/Characters/Battle Sprites/Monster Pack Files/spritesheets
+res://Common/Themes
 res://Mobs
+res://Mobs/Attacks
+res://Common/Shaders
+res://Assets/VFX
+res://Mobs/Attacks/Projectiles
+res://Assets/Characters/Battle Sprites/Monster Pack Files/spritesheets
 res://Tests
 res://Assets
 res://Assets/DG Asha Character
-res://Common/Shaders
 res://Player/Weapons
 res://Player/Projectiles
 res://Common

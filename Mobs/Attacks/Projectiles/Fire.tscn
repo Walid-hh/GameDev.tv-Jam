@@ -1,6 +1,6 @@
 [gd_scene load_steps=24 format=3 uid="uid://byvwypyycep0j"]
 
-[ext_resource type="Script" uid="uid://cvr4ed4ss8x4c" path="res://Common/hit_box.gd" id="1_1vb46"]
+[ext_resource type="Script" uid="uid://cvr4ed4ss8x4c" path="res://Common/Scripts/hit_box.gd" id="1_1vb46"]
 [ext_resource type="Texture2D" uid="uid://beax2swyuo0ol" path="res://Assets/VFX/Fire+Sparks-Sheet.png" id="2_6okiw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o47iq"]
@@ -148,6 +148,8 @@ animations = [{
 radius = 7.65
 
 [node name="Fire" type="Area2D"]
+z_index = 11
+scale = Vector2(0.7, 0.7)
 collision_layer = 2
 script = ExtResource("1_1vb46")
 damage_source = 2

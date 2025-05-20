@@ -1,0 +1,192 @@
+[gd_scene load_steps=17 format=3 uid="uid://bjsgxn2vqrab4"]
+
+[ext_resource type="Script" uid="uid://cvr4ed4ss8x4c" path="res://Common/Scripts/hit_box.gd" id="2_1lqbh"]
+[ext_resource type="Texture2D" uid="uid://dfp5j5eobiwc7" path="res://Assets/VFX/Sparks-Sheet.png" id="3_0x14d"]
+[ext_resource type="Shader" uid="uid://2paq58q3enwi" path="res://Common/Shaders/fire_trail.gdshader" id="4_1lqbh"]
+[ext_resource type="Texture2D" uid="uid://duhkdjffs8mhn" path="res://Assets/VFX/FaireTrail.png" id="4_rkmke"]
+[ext_resource type="Script" uid="uid://dkfye03pujj48" path="res://Mobs/Attacks/fire_trail_sprite.gd" id="5_1lqbh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7256j"]
+size = Vector2(64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gkncv"]
+atlas = ExtResource("3_0x14d")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_thwdf"]
+atlas = ExtResource("3_0x14d")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1yqkw"]
+atlas = ExtResource("3_0x14d")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g48a8"]
+atlas = ExtResource("3_0x14d")
+region = Rect2(0, 96, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o2ne6"]
+atlas = ExtResource("3_0x14d")
+region = Rect2(96, 96, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gdrrd"]
+atlas = ExtResource("3_0x14d")
+region = Rect2(192, 96, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sn84s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gkncv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_thwdf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1yqkw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g48a8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o2ne6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gdrrd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0x14d"]
+shader = ExtResource("4_1lqbh")
+shader_parameter/visible_time = 0.0
+shader_parameter/elongation_factor = 180.0
+shader_parameter/shrink_factor = 5.0
+shader_parameter/duration = 1.5
+shader_parameter/shrink_start_time = 0.5
+shader_parameter/loop = true
+shader_parameter/fade_out = true
+
+[sub_resource type="Animation" id="Animation_ssiwj"]
+resource_name = "aoefire"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%FireTrail:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape2D:shape:size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.8, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(64, 32), Vector2(64, 128)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CollisionShape2D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.8, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(32, 16), Vector2(32, 64)]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("..")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(1.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3gcwf"]
+_data = {
+&"aoefire": SubResource("Animation_ssiwj")
+}
+
+[node name="AoeAttack" type="Node2D"]
+z_index = 2
+
+[node name="HitBox2D" type="Area2D" parent="."]
+collision_layer = 2
+script = ExtResource("2_1lqbh")
+damage_source = 2
+detected_hurtboxes = 1
+metadata/_custom_type_script = "uid://cvr4ed4ss8x4c"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox2D"]
+position = Vector2(32, 16)
+shape = SubResource("RectangleShape2D_7256j")
+disabled = true
+debug_color = Color(0.855956, 0.00780421, 0.281333, 0.42)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="HitBox2D"]
+position = Vector2(32, 24)
+rotation = 2.35619
+scale = Vector2(0.6, 0.6)
+sprite_frames = SubResource("SpriteFrames_sn84s")
+autoplay = "default"
+frame_progress = 0.770006
+
+[node name="FireTrail" type="Sprite2D" parent="HitBox2D"]
+unique_name_in_owner = true
+visible = false
+material = SubResource("ShaderMaterial_0x14d")
+position = Vector2(32, 12)
+scale = Vector2(1, 0.375)
+texture = ExtResource("4_rkmke")
+script = ExtResource("5_1lqbh")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HitBox2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_3gcwf")
+}
+autoplay = "aoefire"

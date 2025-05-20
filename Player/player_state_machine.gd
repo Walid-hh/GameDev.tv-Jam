@@ -203,7 +203,6 @@ class StateCombat extends State :
 				if player.healing_charges > 0 :
 					player.health_component.health += 3
 					player.healing_charges -= 1
-				print(player.health_component.health)
 		return Events.NONE
 
 class StateStagger extends State :

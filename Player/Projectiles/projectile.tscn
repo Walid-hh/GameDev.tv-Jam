@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b73pjjpq1p7wo" path="res://Player/Projectiles/projectile.gd" id="1_8x1mg"]
 [ext_resource type="Texture2D" uid="uid://wktkjwh57lgo" path="res://Assets/New Items [Update]/Arrow.png" id="2_kndma"]
-[ext_resource type="Script" uid="uid://cvr4ed4ss8x4c" path="res://Common/hit_box.gd" id="3_kndma"]
+[ext_resource type="Script" uid="uid://cvr4ed4ss8x4c" path="res://Common/Scripts/hit_box.gd" id="3_kndma"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_r0d5v"]
 radius = 8.0

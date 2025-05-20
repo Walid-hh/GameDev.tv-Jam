@@ -6,6 +6,9 @@ enum Events {
 	COMBAT_STARTED,
 	TOOK_HIT,
 	HEALTH_DEPLETED,
+	ATTACK_ONE,
+	ATTACK_TWO,
+	ATTACK_THREE
 }
 
 class StateMachine extends Node:
@@ -146,19 +149,29 @@ class StateIdle extends State :
 	func enter():
 		mob.mob_sprite.play("idle")
 	
+	func update(delta) -> Events :
+		return Events.NONE
 
-class StateStagger extends State :
+
+class StateCombat extends State :
 	
-	func _init( init_mob : Mob) :
-		super("Stagger" , init_mob)
-
-	func enter():
-		mob.mob_sprite.material.set_shader_parameter("is_flashing" , true)
-		await mob.get_tree().create_timer(0.5).timeout
-		finished.emit()
+	var events_attack := [Events.ATTACK_ONE , Events.ATTACK_TWO ]
+	var wait_time := 3.0
+	var timer := 0.0
+	
+	func _init(init_mob : Mob ) -> void:
+		super("Combat" , init_mob)
+	
+	
+	func update(delta) -> Events :
+		
+		timer += delta
+		if timer >= wait_time :
+			return events_attack.pick_random()
+		return Events.NONE
 
 	func exit():
-		mob.mob_sprite.material.set_shader_parameter("is_flashing" , false)
+		timer = 0.0
 
 class StateDie extends State :
 	

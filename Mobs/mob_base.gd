@@ -1,8 +1,10 @@
-class_name Mob extends CharacterBody2D
+class_name Mob extends Node2D
 
 @onready var mob_sprite: AnimatedSprite2D = %MobSprite
 @onready var health_component: HealthComponent = %HealthComponent
+@onready var stagger_health_component: StaggerHealthComponent = %StaggerHealthComponent
 @onready var die_smoke: AnimatedSprite2D = %DieSmoke
+var stagger_timer : Timer
 
 @export_category("Base Stats")
 @export var max_health := 5
@@ -16,27 +18,19 @@ class_name Mob extends CharacterBody2D
 var state_machine : Node
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	health_component.max_health = stagger_health
-	state_machine = MobFSM.StateMachine.new()
-	add_child(state_machine)
+	stagger_timer = Timer.new()
+	add_child(stagger_timer)
+	stagger_timer.wait_time = 0.3
+	stagger_timer.one_shot = true
+	health_component.max_health = max_health
+	stagger_health_component.stagger_max_health = stagger_health
+	stagger_health_component.hurt_box.took_hit.connect(func(hit_box : HitBox2D):
+		mob_sprite.material.set_shader_parameter("is_flashing" , true)
+		stagger_timer.start())
+	stagger_timer.timeout.connect(func() -> void :
+		mob_sprite.material.set_shader_parameter("is_flashing" , false))
 
-	var idle := MobFSM.StateIdle.new(self)
-
-	var stagger := MobFSM.StateStagger.new(self)
-
-	var die := MobFSM.StateDie.new(self)
-
-	state_machine.transitions ={
-		idle :{
-			MobFSM.Events.HEALTH_DEPLETED : die,
-		},
-		die :{
-			MobFSM.Events.FINISHED : idle
-		}
-	}
-	state_machine.activate(idle)
-	state_machine.is_debugging = true
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("shoot") :
-		state_machine.trigger_event(MobFSM.Events.HEALTH_DEPLETED)
+
+func setup_state_machine() -> void :
+	pass

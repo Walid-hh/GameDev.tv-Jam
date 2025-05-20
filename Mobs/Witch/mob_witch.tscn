@@ -1,0 +1,75 @@
+[gd_scene load_steps=11 format=3 uid="uid://mkmhd4gdlu4r"]
+
+[ext_resource type="PackedScene" uid="uid://hjiocyyjbqt2" path="res://Mobs/mob_base.tscn" id="1_3qnat"]
+[ext_resource type="Script" uid="uid://ckggxupi1cpy1" path="res://Mobs/Witch/mob_witch.gd" id="2_k5efk"]
+[ext_resource type="Texture2D" uid="uid://pdh2rfc10or7" path="res://Assets/Characters/Battle Sprites/Monster Pack Files/spritesheets/witch.png" id="3_8kacw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t3pa3"]
+atlas = ExtResource("3_8kacw")
+region = Rect2(0, 0, 55, 93)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8d4e1"]
+atlas = ExtResource("3_8kacw")
+region = Rect2(55, 0, 55, 93)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4thob"]
+atlas = ExtResource("3_8kacw")
+region = Rect2(110, 0, 55, 93)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2fhpl"]
+atlas = ExtResource("3_8kacw")
+region = Rect2(165, 0, 55, 93)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qu1fg"]
+atlas = ExtResource("3_8kacw")
+region = Rect2(220, 0, 55, 93)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a2hmg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t3pa3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8d4e1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4thob")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2fhpl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qu1fg")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3qnat"]
+size = Vector2(64, 56)
+
+[node name="MobWitch" instance=ExtResource("1_3qnat")]
+script = ExtResource("2_k5efk")
+
+[node name="MobSprite" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_a2hmg")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.433612
+
+[node name="CollisionShape2D2" parent="HurtBox2D" index="0"]
+position = Vector2(0, -20)
+shape = SubResource("RectangleShape2D_3qnat")
+debug_color = Color(0.085554, 0.648035, 0.0886732, 0.42)
+
+[node name="DebugLabel" parent="." index="4"]
+offset_left = -16.0
+offset_top = -48.0
+offset_right = 48.0
+offset_bottom = -25.0
+
+[node name="DieSmoke" parent="." index="5"]
+frame = 0
+frame_progress = 0.0

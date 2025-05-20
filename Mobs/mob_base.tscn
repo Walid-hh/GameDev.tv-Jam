@@ -1,20 +1,18 @@
 [gd_scene load_steps=42 format=3 uid="uid://hjiocyyjbqt2"]
 
-[ext_resource type="Script" uid="uid://wsqlki72saui" path="res://Mobs/mob_base.gd" id="1_a0ago"]
-[ext_resource type="Script" uid="uid://dis28afvskwxt" path="res://Common/hurt_box.gd" id="1_etq3u"]
+[ext_resource type="Script" uid="uid://dis28afvskwxt" path="res://Common/Scripts/hurt_box.gd" id="1_etq3u"]
+[ext_resource type="Script" uid="uid://bvg7tg6sa61t5" path="res://Mobs/mob_base.gd" id="1_j4182"]
 [ext_resource type="Shader" uid="uid://dwxwc2ut7royn" path="res://Common/Shaders/stagger.gdshader" id="2_8kaik"]
-[ext_resource type="Script" uid="uid://dvcyyt7vwp6ie" path="res://Common/health_component.gd" id="2_a0ago"]
-[ext_resource type="FontFile" uid="uid://4rldlvbm84be" path="res://Assets/Fonts/Stacked pixel.ttf" id="4_434aq"]
+[ext_resource type="Script" uid="uid://dvcyyt7vwp6ie" path="res://Common/Scripts/health_component.gd" id="2_a0ago"]
+[ext_resource type="Script" uid="uid://devpe547680jy" path="res://Common/Scripts/stagger_health_component.gd" id="6_8kila"]
 [ext_resource type="Texture2D" uid="uid://di0l3mvqxqccm" path="res://Assets/VFX/Smoke2-Sheet.png" id="6_j4182"]
+[ext_resource type="Theme" uid="uid://bh8bi05f8sjo2" path="res://Common/Themes/game_theme.tres" id="7_8kila"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j4182"]
 shader = ExtResource("2_8kaik")
 shader_parameter/flash_speed = 8.0
 shader_parameter/flash_intensity = 0.9
 shader_parameter/is_flashing = false
-
-[sub_resource type="LabelSettings" id="LabelSettings_8kaik"]
-font = ExtResource("4_434aq")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a2hmg"]
 atlas = ExtResource("6_j4182")
@@ -248,17 +246,17 @@ animations = [{
 "speed": 40.0
 }]
 
-[node name="MobBase" type="CharacterBody2D"]
-script = ExtResource("1_a0ago")
+[node name="MobBase" type="Node2D"]
+script = ExtResource("1_j4182")
 
 [node name="MobSprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_j4182")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-
 [node name="HurtBox2D" type="Area2D" parent="."]
+collision_layer = 2
 script = ExtResource("1_etq3u")
+hurtbox_type = 2
 metadata/_custom_type_script = "uid://dis28afvskwxt"
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtBox2D"]
@@ -269,12 +267,18 @@ script = ExtResource("2_a0ago")
 hurt_box = NodePath("../HurtBox2D")
 metadata/_custom_type_script = "uid://dvcyyt7vwp6ie"
 
+[node name="StaggerHealthComponent" type="Node2D" parent="." node_paths=PackedStringArray("hurt_box")]
+unique_name_in_owner = true
+script = ExtResource("6_8kila")
+hurt_box = NodePath("../HurtBox2D")
+metadata/_custom_type_script = "uid://devpe547680jy"
+
 [node name="DebugLabel" type="Label" parent="."]
 unique_name_in_owner = true
 offset_right = 40.0
 offset_bottom = 23.0
+theme = ExtResource("7_8kila")
 text = "test"
-label_settings = SubResource("LabelSettings_8kaik")
 
 [node name="DieSmoke" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
