@@ -6,6 +6,7 @@ enum Events {
 	COMBAT_STARTED,
 	TOOK_HIT,
 	HEALTH_DEPLETED,
+	CRIT_ATTACK,
 }
 
 class StateMachine extends Node:
@@ -180,6 +181,8 @@ class StateCombat extends State :
 		weapon = init_weapon
 	
 	func update(delta) -> Events:
+		if Input.is_action_just_pressed("shoot") and player.crit_attack :
+			return Events.CRIT_ATTACK
 		if Input.is_action_just_pressed("shoot") and not is_shooting:
 			player.player_sprite.play("idle" + str(player.direction_text))
 			is_shooting = true
@@ -236,10 +239,29 @@ class StateStagger extends State :
 		player.screen_shake.material.set_shader_parameter("is_shaking" , false)
 		player.health_component.hurt_box.hit_box_count = 0
 
+class StateCritAttack extends State :
+	
+	func _init(init_player : Player) -> void:
+		super("crit_attack" , init_player)
+
+	func enter():
+		player.player_sprite.play("crit_attack")
+		player.player_sprite.animation_finished.connect(crit_land)
+	
+	func exit():
+		player.crit_attack = false
+		player.player_sprite.animation_finished.disconnect(crit_land)
+	
+	func crit_land() -> void :
+			player.apply_hit_stop()
+			Global.crit_landed.emit()
+			finished.emit()
+
 class StateDie extends State :
 	
 	func _init(init_player : Player) -> void :
 		super("die" , init_player)
 	
 	func enter():
+		Global.player_died.emit()
 		player.player_sprite.play("die" + str(player.direction_text))

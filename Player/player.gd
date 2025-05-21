@@ -2,16 +2,24 @@ class_name Player extends CharacterBody2D
 
 @onready var screen_shake: ColorRect = %ScreenShake
 @onready var player_sprite: AnimatedSprite2D = %PlayerSprite
+@onready var health_bar: ProgressBar = %HealthBar
+@onready var heal_count: Label = %HealCount
+@onready var thunder_count: Label = %ThunderCount
 @export_category("Base Stats")
 @export var max_health := 5
 @export var walk_speed := 100
-@export var healing_charges := 5
+@export var healing_charges := 3
+@export var thunder_chargers := 1
 @export var health_component : HealthComponent = null
 @export_category("Weapon")
 @export var weapon : Weapon = null
+@export_category("Hit Stop")
+@export var hit_stop_duration: float = 0.1
+@export var hit_stop_strength: float = 0.05
 @export_category("Debug")
 @export var debug_label : Label = null
 
+var crit_attack := false
 var last_direction : Vector2 = Vector2.DOWN
 var direction_text : String = "_down"
 var state_machine : Node
@@ -26,8 +34,6 @@ func _ready() -> void:
 	health_component.hurt_box.took_hit.connect(func(hit_box) -> void :
 		health_component.damage_health(hit_box)
 		state_machine.trigger_event(PlayerFSM.Events.TOOK_HIT))
-	health_component.max_health = max_health
-	print(health_component.health)
 
 
 	var safe := PlayerFSM.StateSafe.new(self)
@@ -38,6 +44,8 @@ func _ready() -> void:
 
 	var stagger := PlayerFSM.StateStagger.new(self)
 	
+	var crit_attack := PlayerFSM.StateCritAttack.new(self)
+	
 	var die := PlayerFSM.StateDie.new(self)
 
 	state_machine.transitions ={
@@ -46,6 +54,10 @@ func _ready() -> void:
 		},
 		combat :{
 			PlayerFSM.Events.FINISHED : safe,
+			PlayerFSM.Events.CRIT_ATTACK : crit_attack,
+		},
+		crit_attack :{
+			PlayerFSM.Events.FINISHED : combat,
 		},
 		stagger :{
 			PlayerFSM.Events.FINISHED : combat,
@@ -59,12 +71,15 @@ func _ready() -> void:
 	state_machine.add_transition_to_all_states(PlayerFSM.Events.HEALTH_DEPLETED , die)
 	state_machine.activate(combat)
 	state_machine.is_debugging = true
-	
+	health_bar.max_value = health_component.max_health
 
 func _physics_process(delta: float) -> void:
-
+	
 	Global.player_position = global_position
 	Global.player_last_direction = last_direction
+	health_bar.value = health_component.health
+	heal_count.text = str(healing_charges)
+	thunder_count.text = str(thunder_chargers)
 	match last_direction :
 		Vector2.UP : direction_text = "_up"
 		Vector2.DOWN : direction_text = "_down"
@@ -73,9 +88,17 @@ func _physics_process(delta: float) -> void:
 	if health_component.health <= 0 :
 		state_machine.trigger_event(PlayerFSM.Events.HEALTH_DEPLETED)
 
+	
 func _combat_movement(speed : int) -> Vector2 :
 	var direction := Input.get_vector("move_left","move_right","move_up","move_down")
 	direction = direction.sign().normalized()
 	velocity = direction * speed
 	move_and_slide()
 	return direction
+
+func apply_hit_stop():
+	var original_time_scale = Engine.time_scale
+	Engine.time_scale = hit_stop_strength
+	var timer = get_tree().create_timer(hit_stop_duration * hit_stop_strength)
+	await timer.timeout
+	Engine.time_scale = original_time_scale

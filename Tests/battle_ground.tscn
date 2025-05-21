@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=4 uid="uid://cj7x17vbiubla"]
+[gd_scene load_steps=10 format=4 uid="uid://cj7x17vbiubla"]
 
 [ext_resource type="Texture2D" uid="uid://dsjt88jrx3pb6" path="res://Assets/BattleGround Set.png" id="1_8q24g"]
 [ext_resource type="Texture2D" uid="uid://435s6rkr3rb7" path="res://Assets/Set 1.1.png" id="1_v2uok"]
-[ext_resource type="PackedScene" uid="uid://mkmhd4gdlu4r" path="res://Mobs/Witch/mob_witch.tscn" id="2_0h5bq"]
 [ext_resource type="PackedScene" uid="uid://xlly15dedj3l" path="res://Player/player.tscn" id="2_gesce"]
+[ext_resource type="PackedScene" uid="uid://dkuah6lfjr8w" path="res://Player/crit_zone.tscn" id="5_0h5bq"]
+[ext_resource type="PackedScene" uid="uid://b3wa7npxtbhyg" path="res://Mobs/Plant/mob_plant.tscn" id="5_1s8h6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ed6r6"]
 texture = ExtResource("1_v2uok")
@@ -384,9 +385,12 @@ tile_set = SubResource("TileSet_0h5bq")
 tile_map_data = PackedByteArray("AAAEAAUAAAADAAoAAAAEAAYAAAADAAoAAAAEAAcAAAADAAoAAAAFAAcAAAAEAAoAAAAFAAgAAAAEAAoAAAAEAAgAAAADAAoAAAAPAAYAAAAFAAoAAAAPAAcAAAAFAAoAAAAPAAgAAAAFAAoAAAAOAAgAAAAEAAoAAAANAAgAAAAEAAoAAAAMAAgAAAAEAAoAAAALAAgAAAAEAAoAAAAKAAgAAAAEAAoAAAAJAAgAAAAEAAoAAAAIAAgAAAAEAAoAAAAHAAgAAAAEAAoAAAAGAAgAAAAEAAoAAAAGAAcAAAAEAAoAAAAHAAcAAAAEAAoAAAAIAAcAAAAEAAoAAAAGAAYAAAAEAAoAAAAFAAYAAAAEAAoAAAAFAAUAAAAEAAoAAAAFAAQAAAAEAAkAAAAEAAQAAAADAAkAAAAGAAUAAAAEAAoAAAAHAAUAAAAEAAoAAAAIAAUAAAAEAAoAAAAGAAQAAAAEAAkAAAAHAAQAAAAEAAkAAAAIAAQAAAAEAAkAAAAJAAQAAAAEAAkAAAAKAAQAAAAEAAkAAAALAAUAAAAEAAoAAAAMAAUAAAAEAAoAAAANAAUAAAAEAAoAAAAMAAYAAAAEAAoAAAALAAYAAAAEAAoAAAAKAAYAAAAEAAoAAAAJAAYAAAAEAAoAAAAIAAYAAAAEAAoAAAAHAAYAAAAEAAoAAAAJAAcAAAAEAAoAAAAKAAcAAAAEAAoAAAALAAcAAAAEAAoAAAAMAAcAAAAEAAoAAAANAAcAAAAEAAoAAAAOAAcAAAAEAAoAAAAOAAYAAAAEAAoAAAANAAYAAAAEAAoAAAAOAAUAAAAEAAoAAAAPAAUAAAAFAAoAAAAPAAQAAAAFAAkAAAAOAAQAAAAEAAkAAAANAAQAAAAEAAkAAAAMAAQAAAAEAAkAAAALAAQAAAAEAAkAAAAKAAUAAAAEAAoAAAAJAAUAAAAEAAoAAAAEAAoAAAADAAsAAAAFAAoAAAAEAAsAAAAGAAoAAAAEAAsAAAAHAAoAAAAEAAsAAAAIAAoAAAAEAAsAAAAJAAoAAAAEAAsAAAAKAAoAAAAEAAsAAAALAAoAAAAEAAsAAAAMAAoAAAAEAAsAAAANAAoAAAAEAAsAAAAOAAoAAAAEAAsAAAAPAAoAAAAFAAsAAAAPAAkAAAAFAAoAAAAOAAkAAAAEAAoAAAANAAkAAAAEAAoAAAAMAAkAAAAEAAoAAAALAAkAAAAEAAoAAAAKAAkAAAAEAAoAAAAJAAkAAAAEAAoAAAAIAAkAAAAEAAoAAAAHAAkAAAAEAAoAAAAGAAkAAAAEAAoAAAAFAAkAAAAEAAoAAAAEAAkAAAADAAoAAAA=")
 tile_set = SubResource("TileSet_v2uok")
 
-[node name="MobWitch" parent="." instance=ExtResource("2_0h5bq")]
-z_index = -1
-position = Vector2(160, 56)
-
 [node name="Player" parent="." instance=ExtResource("2_gesce")]
 position = Vector2(131, 126)
+hit_stop_duration = 0.5
+
+[node name="CritZone" parent="." instance=ExtResource("5_0h5bq")]
+position = Vector2(161, 72)
+
+[node name="MobPlant" parent="." instance=ExtResource("5_1s8h6")]
+position = Vector2(160, 48)

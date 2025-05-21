@@ -52,6 +52,8 @@ size = Vector2(64, 56)
 
 [node name="MobWitch" instance=ExtResource("1_3qnat")]
 script = ExtResource("2_k5efk")
+max_health = 1
+max_stagger_health = 10
 
 [node name="MobSprite" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_a2hmg")
@@ -73,3 +75,10 @@ offset_bottom = -25.0
 [node name="DieSmoke" parent="." index="5"]
 frame = 0
 frame_progress = 0.0
+
+[node name="VBoxContainer" parent="CanvasLayer/Control" index="0"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 120.0
+offset_bottom = 64.0

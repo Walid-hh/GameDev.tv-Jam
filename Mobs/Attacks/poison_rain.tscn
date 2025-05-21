@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqw5e8p8p2j2c"]
+
+[ext_resource type="Script" uid="uid://dhpm55liwjtti" path="res://Mobs/Attacks/poison_rain.gd" id="1_itgsm"]
+[ext_resource type="PackedScene" uid="uid://dn3tm68o48qyw" path="res://Mobs/Attacks/Projectiles/fire_green.tscn" id="2_d7my7"]
+
+[node name="PoisonRain" type="Node2D"]
+position = Vector2(71, 22)
+script = ExtResource("1_itgsm")
+
+[node name="FireGreen" parent="." instance=ExtResource("2_d7my7")]

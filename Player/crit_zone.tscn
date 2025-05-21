@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://dkuah6lfjr8w"]
+
+[ext_resource type="Script" uid="uid://26rnoduqa12t" path="res://Player/crit_zone.gd" id="1_y1r4v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ed6r6"]
+
+[node name="CritZone" type="Area2D"]
+visible = false
+monitoring = false
+monitorable = false
+script = ExtResource("1_y1r4v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_ed6r6")
+debug_color = Color(0.768627, 0.756863, 0, 0.419608)
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(-8.99999, 13.2)
+scale = Vector2(0.45, 0.4)
+color = Color(0.929412, 0.92549, 0, 0.623529)
+polygon = PackedVector2Array(0, -8, 0, -48, 40, -48, 40, -8)
+uv = PackedVector2Array(0, -8, 0, -48, 40, -48, 40, -8)

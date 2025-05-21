@@ -64,14 +64,14 @@ shader = ExtResource("4_1lqbh")
 shader_parameter/visible_time = 0.0
 shader_parameter/elongation_factor = 180.0
 shader_parameter/shrink_factor = 5.0
-shader_parameter/duration = 1.5
+shader_parameter/duration = 1.2
 shader_parameter/shrink_start_time = 0.5
 shader_parameter/loop = true
 shader_parameter/fade_out = true
 
 [sub_resource type="Animation" id="Animation_ssiwj"]
 resource_name = "aoefire"
-length = 1.5
+length = 1.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -79,7 +79,7 @@ tracks/0/path = NodePath("AnimatedSprite2D:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.8),
+"times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -91,7 +91,7 @@ tracks/1/path = NodePath("CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.8, 1.5),
+"times": PackedFloat32Array(0, 0.766667, 1.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, false, true]
@@ -103,7 +103,7 @@ tracks/2/path = NodePath("%FireTrail:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.8, 1.5),
+"times": PackedFloat32Array(0, 0.5, 1.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
@@ -115,7 +115,7 @@ tracks/3/path = NodePath("CollisionShape2D:shape:size")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.8, 1.5),
+"times": PackedFloat32Array(0.5, 1.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(64, 32), Vector2(64, 128)]
@@ -127,7 +127,7 @@ tracks/4/path = NodePath("CollisionShape2D:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0.8, 1.5),
+"times": PackedFloat32Array(0.5, 1.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(32, 16), Vector2(32, 64)]
@@ -139,7 +139,7 @@ tracks/5/path = NodePath("..")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(1.5),
+"times": PackedFloat32Array(1.2),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],

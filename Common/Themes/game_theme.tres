@@ -1,7 +1,24 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bh8bi05f8sjo2"]
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://bh8bi05f8sjo2"]
 
 [ext_resource type="FontFile" uid="uid://ci2h7bhga5kcc" path="res://Assets/Fonts/Pixelchunk.ttf" id="1_j646p"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j646p"]
+bg_color = Color(0.626453, 0.182884, 0.18215, 0.486275)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ukq4g"]
+bg_color = Color(0.932413, 0.000349622, 0.226339, 1)
 
 [resource]
 default_font = ExtResource("1_j646p")
 default_font_size = 8
+ProgressBar/styles/background = SubResource("StyleBoxFlat_j646p")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_ukq4g")

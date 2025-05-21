@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bcpudevnaky7y"]
+
+[ext_resource type="Texture2D" uid="uid://bwdwjtq0ky1cv" path="res://Assets/Icons/mob_health_point.png" id="1_wuxo4"]
+
+[node name="MobHealthPoint" type="TextureRect"]
+texture = ExtResource("1_wuxo4")
+stretch_mode = 4

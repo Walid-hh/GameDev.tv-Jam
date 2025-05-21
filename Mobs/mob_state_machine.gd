@@ -6,9 +6,11 @@ enum Events {
 	COMBAT_STARTED,
 	TOOK_HIT,
 	HEALTH_DEPLETED,
+	STAGGER_HEALTH_DEPLETED,
 	ATTACK_ONE,
 	ATTACK_TWO,
-	ATTACK_THREE
+	ATTACK_THREE,
+	PLAYER_DIED,
 }
 
 class StateMachine extends Node:
@@ -155,8 +157,8 @@ class StateIdle extends State :
 
 class StateCombat extends State :
 	
-	var events_attack := [Events.ATTACK_ONE , Events.ATTACK_TWO ]
-	var wait_time := 3.0
+	var events_attack := [Events.ATTACK_ONE , Events.ATTACK_TWO , Events.ATTACK_THREE ]
+	var wait_time := 1.5
 	var timer := 0.0
 	
 	func _init(init_mob : Mob ) -> void:
@@ -169,9 +171,43 @@ class StateCombat extends State :
 		if timer >= wait_time :
 			return events_attack.pick_random()
 		return Events.NONE
-
+	
 	func exit():
 		timer = 0.0
+
+class StateStagger extends State :
+	
+	var stagger_time := 8.0
+	var stagger_timer : = 0.0
+	func _init(init_mob : Mob) -> void:
+		super("Stagger" , init_mob)
+	
+	func enter():
+		Global.mob_staggered.emit()
+		Global.crit_landed.connect(crit_damage)
+	
+	func update(delta) -> Events :
+		stagger_timer += delta
+		
+		if stagger_timer >= stagger_time :
+			mob.stagger_health_component.stagger_health = mob.max_stagger_health
+			Global.mob_stagger_fininsh.emit()
+			return Events.FINISHED
+		
+		return Events.NONE
+	
+	func exit() :
+		await mob.get_tree().create_timer(0.5).timeout
+		mob.mob_sprite.material.set_shader_parameter("is_flashing" , false)
+		Global.crit_landed.disconnect(crit_damage)
+		stagger_timer = 0.0
+
+	func crit_damage() -> void:
+		mob.mob_sprite.material.set_shader_parameter("is_flashing" , true)
+		mob.health_component.health -= 1
+		if mob.health_component.health > 0 :
+			mob.stagger_health_component.stagger_health = mob.max_stagger_health
+		finished.emit()
 
 class StateDie extends State :
 	
@@ -182,9 +218,11 @@ class StateDie extends State :
 		mob.mob_sprite.visible = !mob.mob_sprite.visible
 		mob.die_smoke.visible = !mob.die_smoke.visible
 		mob.die_smoke.play("pooof")
-		mob.die_smoke.animation_finished.connect(func() -> void :
-			finished.emit()
-			)
+		mob.die_smoke.animation_finished.connect(finish)
 
 	func exit():
 		mob.die_smoke.visible = !mob.die_smoke.visible
+		mob.die_smoke.animation_finished.disconnect(finish)
+
+	func finish() -> void :
+		finished.emit()

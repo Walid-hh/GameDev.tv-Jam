@@ -1,4 +1,4 @@
-[gd_scene load_steps=191 format=3 uid="uid://xlly15dedj3l"]
+[gd_scene load_steps=215 format=3 uid="uid://xlly15dedj3l"]
 
 [ext_resource type="Script" uid="uid://y7oa0v8polrj" path="res://Player/player.gd" id="1_gwnis"]
 [ext_resource type="Texture2D" uid="uid://cykp5ht3jwxlq" path="res://Assets/DG Asha Character/Blue Asha Idle 32x32.png" id="1_l8h54"]
@@ -9,16 +9,95 @@
 [ext_resource type="Script" uid="uid://dvcyyt7vwp6ie" path="res://Common/Scripts/health_component.gd" id="3_btcbx"]
 [ext_resource type="Texture2D" uid="uid://dheq6p7psdetw" path="res://Assets/DG Asha Character/Blue Asha Run 32x32.png" id="3_fhl08"]
 [ext_resource type="Texture2D" uid="uid://bva31vr6ox1vk" path="res://Assets/DG Asha Character/Blue Asha Walk 32x32.png" id="3_k53q1"]
+[ext_resource type="Texture2D" uid="uid://boeick4o01ya6" path="res://Assets/DG Asha Character/Blue Charged attack 2 48x48.png" id="3_lfmf2"]
 [ext_resource type="PackedScene" uid="uid://7s4877053gps" path="res://Player/Weapons/bow.tscn" id="8_00tjw"]
 [ext_resource type="PackedScene" uid="uid://uif4ojw374ne" path="res://Player/Projectiles/projectile.tscn" id="9_00tjw"]
 [ext_resource type="Theme" uid="uid://bh8bi05f8sjo2" path="res://Common/Themes/game_theme.tres" id="10_p5o4e"]
+[ext_resource type="Texture2D" uid="uid://wnshvgl724tt" path="res://Assets/Icons/heal_icon.png" id="14_dkpta"]
 [ext_resource type="Shader" uid="uid://dfab5fjxu1y83" path="res://Common/Shaders/screen_shake.gdshader" id="14_gu6f8"]
+[ext_resource type="Texture2D" uid="uid://cxsjim8bxqtev" path="res://Assets/Icons/Icon 11.png" id="15_lfmf2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_apopc"]
 shader = ExtResource("2_x3vf3")
 shader_parameter/flash_speed = 5.0
 shader_parameter/flash_intensity = 0.7
 shader_parameter/is_flashing = false
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rme18"]
+atlas = ExtResource("3_lfmf2")
+region = Rect2(0, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i18xy"]
+atlas = ExtResource("3_lfmf2")
+region = Rect2(48, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ilq1b"]
+atlas = ExtResource("3_lfmf2")
+region = Rect2(96, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3fuks"]
+atlas = ExtResource("3_lfmf2")
+region = Rect2(144, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vbpgt"]
+atlas = ExtResource("3_lfmf2")
+region = Rect2(192, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l8tec"]
+atlas = ExtResource("3_lfmf2")
+region = Rect2(240, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vqfw3"]
+atlas = ExtResource("3_lfmf2")
+region = Rect2(288, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x7kmj"]
+atlas = ExtResource("3_lfmf2")
+region = Rect2(336, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3qvfg"]
+atlas = ExtResource("3_lfmf2")
+region = Rect2(384, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xnv36"]
+atlas = ExtResource("3_lfmf2")
+region = Rect2(432, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ry1jn"]
+atlas = ExtResource("3_lfmf2")
+region = Rect2(480, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4j5jq"]
+atlas = ExtResource("3_lfmf2")
+region = Rect2(528, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sqmb0"]
+atlas = ExtResource("3_lfmf2")
+region = Rect2(576, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_85vsy"]
+atlas = ExtResource("3_lfmf2")
+region = Rect2(624, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nji00"]
+atlas = ExtResource("3_lfmf2")
+region = Rect2(672, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4khqa"]
+atlas = ExtResource("3_lfmf2")
+region = Rect2(720, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k7h50"]
+atlas = ExtResource("3_lfmf2")
+region = Rect2(768, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h4kim"]
+atlas = ExtResource("3_lfmf2")
+region = Rect2(816, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bcr57"]
+atlas = ExtResource("3_lfmf2")
+region = Rect2(864, 144, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_knoy1"]
 atlas = ExtResource("3_5htga")
@@ -712,6 +791,68 @@ region = Rect2(224, 64, 32, 32)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_rme18")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i18xy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ilq1b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3fuks")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vbpgt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l8tec")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vqfw3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x7kmj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3qvfg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xnv36")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ry1jn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4j5jq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sqmb0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_85vsy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nji00")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4khqa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k7h50")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h4kim")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bcr57")
+}],
+"loop": false,
+"name": &"crit_attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_knoy1")
 }, {
 "duration": 1.0,
@@ -1330,8 +1471,8 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_4ntmi"]
 radius = 5.65
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_p5o4e"]
-radius = 8.85
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p5o4e"]
+size = Vector2(10, 11)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_p5o4e"]
 shader = ExtResource("14_gu6f8")
@@ -1341,19 +1482,39 @@ shader_parameter/FactorA = Vector2(100, 100)
 shader_parameter/FactorB = Vector2(1, 1)
 shader_parameter/magnitude = Vector2(0.01, 0.01)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pisgm"]
+bg_color = Color(0, 0.670588, 0.796078, 0.662745)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b1ygp"]
+bg_color = Color(0.0166918, 0.445877, 0.780403, 1)
+border_color = Color(0, 0, 0, 1)
+
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("health_component", "weapon", "debug_label")]
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_gwnis")
 health_component = NodePath("HealthComponent")
 weapon = NodePath("Anchor/Bow")
+hit_stop_duration = 1.0
+hit_stop_strength = 0.2
 debug_label = NodePath("Label")
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_apopc")
 sprite_frames = SubResource("SpriteFrames_jp1hh")
-animation = &"die_up"
+animation = &"crit_attack"
+frame = 7
+frame_progress = 0.344696
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3)
@@ -1366,7 +1527,8 @@ damage_source = 2
 metadata/_custom_type_script = "uid://dis28afvskwxt"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox2D"]
-shape = SubResource("CircleShape2D_p5o4e")
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_p5o4e")
 debug_color = Color(0.138852, 0.605918, 0.297189, 0.42)
 
 [node name="HealthComponent" type="Node2D" parent="." node_paths=PackedStringArray("hurt_box")]
@@ -1391,9 +1553,9 @@ projectile_scene = ExtResource("9_00tjw")
 speed = 200.0
 max_range = 400.0
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="ShakeShade" type="CanvasLayer" parent="."]
 
-[node name="ScreenShake" type="ColorRect" parent="CanvasLayer"]
+[node name="ScreenShake" type="ColorRect" parent="ShakeShade"]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_p5o4e")
 anchors_preset = 15
@@ -1401,3 +1563,78 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="CombatUI" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+
+[node name="Control" type="Control" parent="CombatUI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("10_p5o4e")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CombatUI/Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = -36.0
+offset_right = 62.0
+offset_bottom = -4.0
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CombatUI/Control/VBoxContainer"]
+layout_mode = 2
+
+[node name="HealItem" type="TextureRect" parent="CombatUI/Control/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("14_dkpta")
+
+[node name="HealCount" type="Label" parent="CombatUI/Control/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("10_p5o4e")
+text = ":"
+
+[node name="HealthBar" type="ProgressBar" parent="CombatUI/Control/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_stretch_ratio = 2.42
+theme = ExtResource("10_p5o4e")
+show_percentage = false
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CombatUI/Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -62.0
+offset_top = -36.0
+offset_right = -6.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CombatUI/Control/VBoxContainer2"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CombatUI/Control/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("15_lfmf2")
+
+[node name="ThunderCount" type="Label" parent="CombatUI/Control/VBoxContainer2/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = ":"
+
+[node name="ThunderBar" type="ProgressBar" parent="CombatUI/Control/VBoxContainer2"]
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_pisgm")
+theme_override_styles/fill = SubResource("StyleBoxFlat_b1ygp")
+show_percentage = false

@@ -1,0 +1,56 @@
+[gd_scene load_steps=10 format=3 uid="uid://b3wa7npxtbhyg"]
+
+[ext_resource type="PackedScene" uid="uid://hjiocyyjbqt2" path="res://Mobs/mob_base.tscn" id="1_3gie8"]
+[ext_resource type="Script" uid="uid://cpw2uv082tabm" path="res://Mobs/Plant/mob_plant.gd" id="2_8y8b4"]
+[ext_resource type="Texture2D" uid="uid://cm3lrjphganai" path="res://Assets/Characters/Battle Sprites/Monster Pack Files/spritesheets/Treant.png" id="2_mkpbr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8y8b4"]
+atlas = ExtResource("2_mkpbr")
+region = Rect2(0, 0, 80, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u2y3w"]
+atlas = ExtResource("2_mkpbr")
+region = Rect2(80, 0, 80, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_umh5e"]
+atlas = ExtResource("2_mkpbr")
+region = Rect2(160, 0, 80, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4pl4d"]
+atlas = ExtResource("2_mkpbr")
+region = Rect2(240, 0, 80, 84)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_au1e4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8y8b4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u2y3w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_umh5e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4pl4d")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_52t6w"]
+size = Vector2(88, 50)
+
+[node name="MobPlant" instance=ExtResource("1_3gie8")]
+script = ExtResource("2_8y8b4")
+
+[node name="MobSprite" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_au1e4")
+animation = &"idle"
+
+[node name="CollisionShape2D2" parent="HurtBox2D" index="0"]
+position = Vector2(-4, -15)
+shape = SubResource("RectangleShape2D_52t6w")
+debug_color = Color(0.0862745, 0.647059, 0.0901961, 0.419608)
