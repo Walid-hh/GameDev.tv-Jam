@@ -1,57 +1,57 @@
 class_name MobPlant extends Mob
 
-var circular_attack_scene := preload("res://Mobs/Attacks/circular_attack.tscn")
-var aoe_attack_scene := preload("res://Mobs/Attacks/aoe_attack.tscn")
-var fire_arrow_attack_scene := preload("res://Mobs/Attacks/fire_arrow.tscn")
+var acid_rain_scene := preload("res://Mobs/Plant/PlantAttacks/poison_rain.tscn")
+var trunc_chase_scene := preload("res://Mobs/Plant/PlantAttacks/trunc_chase.tscn")
+var acid_explosion_scene := preload("res://Mobs/Plant/PlantAttacks/acid_explosion.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super()
 	setup_state_machine()
-	var combat_start_timer := Timer.new()
-	add_child(combat_start_timer)
-	combat_start_timer.start(3)
-	combat_start_timer.one_shot = true
-	combat_start_timer.timeout.connect(func() -> void :
-		state_machine.trigger_event(WitchStates.Events.COMBAT_STARTED))
+
 
 func setup_state_machine():
-	state_machine = WitchStates.StateMachine.new()
+	state_machine = PlantStates.StateMachine.new()
 	add_child(state_machine)
-	var idle := WitchStates.StateIdle.new(self)
-	var combat := WitchStates.StateCombat.new(self )
-	var attack_one := WitchStates.StateCircularAttack.new(self , circular_attack_scene)
-	var attack_two := WitchStates.StateAoeAttack.new(self , aoe_attack_scene)
-	var attack_three := WitchStates.StateFireArrow.new(self , fire_arrow_attack_scene)
-	var stagger := WitchStates.StateStagger.new(self)
-	var die := WitchStates.StateDie.new(self)
+	var idle := PlantStates.StateIdle.new(self)
+	var combat := PlantStates.StateCombat.new(self )
+	var attack_one := PlantStates.StateAcidRain.new(self , acid_rain_scene)
+	var attack_two := PlantStates.StateTrunc.new(self , trunc_chase_scene)
+	var attack_three := PlantStates.StateAcidExplosion.new(self , acid_explosion_scene)
+	var stagger := PlantStates.StateStagger.new(self)
+	var stun := PlantStates.StateStun.new(self)
+	var die := PlantStates.StateDie.new(self)
 	state_machine.transitions = {
 		idle :{
-			WitchStates.Events.COMBAT_STARTED : combat
+			PlantStates.Events.COMBAT_STARTED : combat
 		},
 		stagger :{
-			WitchStates.Events.FINISHED : combat,
+			PlantStates.Events.FINISHED : combat,
 		},
 		combat :{
-			WitchStates.Events.FINISHED : idle,
-			WitchStates.Events.ATTACK_ONE : attack_one,
-			WitchStates.Events.ATTACK_TWO : attack_two,
-			WitchStates.Events.ATTACK_THREE : attack_three,
+			PlantStates.Events.FINISHED : idle,
+			PlantStates.Events.ATTACK_ONE : attack_one,
+			PlantStates.Events.ATTACK_TWO : attack_two,
+			PlantStates.Events.ATTACK_THREE : attack_three,
 		},
 		attack_one :{
-			WitchStates.Events.FINISHED : combat,
+			PlantStates.Events.FINISHED : combat,
 		},
 		attack_two :{
-			WitchStates.Events.FINISHED : combat,
+			PlantStates.Events.FINISHED : combat,
 		},
 		attack_three :{
-			WitchStates.Events.FINISHED : combat,
+			PlantStates.Events.FINISHED : combat,
 		},
 		die :{
-			WitchStates.Events.FINISHED : idle,
-		}
+			PlantStates.Events.FINISHED : idle,
+		},
+		stun :{
+			PlantStates.Events.FINISHED : combat
+		},
 	}
-	state_machine.add_transition_to_all_states(WitchStates.Events.STAGGER_HEALTH_DEPLETED , stagger)
-	state_machine.add_transition_to_all_states(WitchStates.Events.PLAYER_DIED , idle)
-	state_machine.add_transition_to_all_states(WitchStates.Events.HEALTH_DEPLETED , die)
-	state_machine.activate(idle)
-	state_machine.is_debugging = true
+	state_machine.add_transition_to_all_states(PlantStates.Events.STUN , stun)
+	state_machine.add_transition_to_all_states(PlantStates.Events.STAGGER_HEALTH_DEPLETED , stagger)
+	state_machine.add_transition_to_all_states(PlantStates.Events.PLAYER_DIED , idle)
+	state_machine.add_transition_to_all_states(PlantStates.Events.HEALTH_DEPLETED , die)
+	state_machine.activate(combat)
+	state_machine.is_debugging = false

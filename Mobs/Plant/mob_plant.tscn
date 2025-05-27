@@ -1,8 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://b3wa7npxtbhyg"]
+[gd_scene load_steps=11 format=3 uid="uid://b3wa7npxtbhyg"]
 
 [ext_resource type="PackedScene" uid="uid://hjiocyyjbqt2" path="res://Mobs/mob_base.tscn" id="1_3gie8"]
 [ext_resource type="Script" uid="uid://cpw2uv082tabm" path="res://Mobs/Plant/mob_plant.gd" id="2_8y8b4"]
 [ext_resource type="Texture2D" uid="uid://cm3lrjphganai" path="res://Assets/Characters/Battle Sprites/Monster Pack Files/spritesheets/Treant.png" id="2_mkpbr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mkpbr"]
+size = Vector2(80, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8y8b4"]
 atlas = ExtResource("2_mkpbr")
@@ -41,16 +44,23 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_52t6w"]
-size = Vector2(88, 50)
+size = Vector2(88, 56)
 
 [node name="MobPlant" instance=ExtResource("1_3gie8")]
 script = ExtResource("2_8y8b4")
+max_health = 2
+max_stagger_health = 40
 
-[node name="MobSprite" parent="." index="0"]
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2(0, 20)
+shape = SubResource("RectangleShape2D_mkpbr")
+
+[node name="MobSprite" parent="." index="1"]
 sprite_frames = SubResource("SpriteFrames_au1e4")
 animation = &"idle"
+autoplay = "idle"
 
 [node name="CollisionShape2D2" parent="HurtBox2D" index="0"]
-position = Vector2(-4, -15)
+position = Vector2(-4, -12)
 shape = SubResource("RectangleShape2D_52t6w")
 debug_color = Color(0.0862745, 0.647059, 0.0901961, 0.419608)

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://ee3s8nlu8266"]
+
+[ext_resource type="PackedScene" uid="uid://cj7x17vbiubla" path="res://Levels/boss_fight.tscn" id="1_vc0h2"]
+[ext_resource type="PackedScene" uid="uid://mkmhd4gdlu4r" path="res://Mobs/Witch/mob_witch.tscn" id="2_e6dyu"]
+
+[node name="WitchBossFight" instance=ExtResource("1_vc0h2")]
+
+[node name="MobWitch" parent="." index="4" instance=ExtResource("2_e6dyu")]
+position = Vector2(160, 56)

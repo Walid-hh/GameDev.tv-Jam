@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://2v8dpnlolunb"]
+
+[ext_resource type="PackedScene" uid="uid://cj7x17vbiubla" path="res://Levels/boss_fight.tscn" id="1_0ywwv"]
+[ext_resource type="PackedScene" uid="uid://b3wa7npxtbhyg" path="res://Mobs/Plant/mob_plant.tscn" id="2_a3ct1"]
+
+[node name="PlantBossFight" instance=ExtResource("1_0ywwv")]
+
+[node name="MobPlant" parent="." index="4" instance=ExtResource("2_a3ct1")]
+position = Vector2(160, 48)

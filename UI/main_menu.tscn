@@ -1,0 +1,314 @@
+[gd_scene load_steps=13 format=3 uid="uid://clnbe1t4uj1m1"]
+
+[ext_resource type="Theme" uid="uid://bh8bi05f8sjo2" path="res://Common/Themes/game_theme.tres" id="1_d8nwk"]
+[ext_resource type="Script" uid="uid://b71f6pdw7pfs3" path="res://UI/main_menu.gd" id="2_4cwpn"]
+[ext_resource type="Texture2D" uid="uid://cjdm574x1fl3s" path="res://Assets/Icons/cog.png" id="3_f40uw"]
+[ext_resource type="Script" uid="uid://dqqu60aoqss1i" path="res://UI/main_menu_settings.gd" id="4_f40uw"]
+[ext_resource type="Shader" uid="uid://snutnctekrtn" path="res://Common/Shaders/blur_and_tint.gdshader" id="5_8ctay"]
+[ext_resource type="Texture2D" uid="uid://cs1hayn03wh5d" path="res://Assets/keyboard/WASD.png" id="6_8ctay"]
+[ext_resource type="Texture2D" uid="uid://dskhidnge1xlt" path="res://Assets/keyboard/mouse_left.png" id="7_k0a0m"]
+[ext_resource type="Texture2D" uid="uid://dooisywbu3rvy" path="res://Assets/keyboard/mouse_right.png" id="8_2mudq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k0a0m"]
+shader = ExtResource("5_8ctay")
+shader_parameter/blur_amount = 0.0
+shader_parameter/tint = Color(0.000528903, 0.0273524, 0.202627, 1)
+shader_parameter/tint_strength = 0.445
+shader_parameter/saturation = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cafmx"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tcix6"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ev3b6"]
+shader = ExtResource("5_8ctay")
+shader_parameter/blur_amount = 0.7
+shader_parameter/tint = Color(0.000999787, 0.0320779, 0.104032, 1)
+shader_parameter/tint_strength = 0.4
+shader_parameter/saturation = 1.0
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_d8nwk")
+script = ExtResource("2_4cwpn")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -64.0
+offset_top = 43.0
+offset_bottom = -17.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="BossFirst" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+text = "Boss 1"
+
+[node name="BossSecond" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+text = "Boss 2"
+
+[node name="BossThird" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+text = "Boss 3"
+
+[node name="Credit" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+text = "Credit"
+
+[node name="Exit" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+text = "Exit"
+
+[node name="SettingsButton" type="TextureButton" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -16.0
+offset_top = -16.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = ExtResource("3_f40uw")
+texture_pressed = ExtResource("3_f40uw")
+texture_hover = ExtResource("3_f40uw")
+stretch_mode = 5
+
+[node name="Containerbackground" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_k0a0m")
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 143.0
+grow_vertical = 2
+
+[node name="InstructionBox" type="VBoxContainer" parent="Containerbackground"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 142.0
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Containerbackground/InstructionBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="Containerbackground/InstructionBox/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("6_8ctay")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Containerbackground/InstructionBox/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Movement"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Containerbackground/InstructionBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="Containerbackground/InstructionBox/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+texture = ExtResource("7_k0a0m")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Containerbackground/InstructionBox/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "shoot"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Containerbackground/InstructionBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="Containerbackground/InstructionBox/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+texture = ExtResource("8_2mudq")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="RichTextLabel" parent="Containerbackground/InstructionBox/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_cafmx")
+text = "stun : requires thunder charge"
+fit_content = true
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Containerbackground/InstructionBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="Containerbackground/InstructionBox/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+texture = ExtResource("7_k0a0m")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="RichTextLabel" parent="Containerbackground/InstructionBox/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_tcix6")
+text = "finisher : inside yellow zone"
+fit_content = true
+
+[node name="SettingsMenu" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("4_f40uw")
+
+[node name="Blur2" type="ColorRect" parent="SettingsMenu"]
+material = SubResource("ShaderMaterial_ev3b6")
+layout_mode = 0
+offset_top = 3.0
+offset_right = 320.0
+offset_bottom = 183.0
+
+[node name="Containerbackground" type="ColorRect" parent="SettingsMenu"]
+material = SubResource("ShaderMaterial_k0a0m")
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 47.751
+anchor_bottom = 26.899
+offset_right = 320.0
+offset_bottom = 180.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingsMenu/Containerbackground"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.078
+anchor_right = 1.0
+anchor_bottom = 0.849
+offset_left = 64.0
+offset_top = 17.96
+offset_right = -56.0
+offset_bottom = 7.18001
+
+[node name="Label" type="Label" parent="SettingsMenu/Containerbackground/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+size_flags_stretch_ratio = 0.4
+theme_override_colors/font_color = Color(0.501961, 0.768627, 0.815686, 1)
+text = "Settings"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SettingsMenu/Containerbackground/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="SettingsMenu/Containerbackground/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="SettingsMenu/Containerbackground/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.501961, 0.768627, 0.815686, 1)
+text = "Music"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="SettingsMenu/Containerbackground/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.501961, 0.768627, 0.815686, 1)
+text = "Sfx
+"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingsMenu/Containerbackground/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MusicSlider" type="HSlider" parent="SettingsMenu/Containerbackground/VBoxContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+min_value = -50.0
+max_value = 0.0
+
+[node name="SfxSlider" type="HSlider" parent="SettingsMenu/Containerbackground/VBoxContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 6
+min_value = -80.0
+max_value = 0.0
+
+[node name="MenuButton" type="Button" parent="SettingsMenu/Containerbackground/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.3
+text = "Return Menu"
+
+[node name="Credits" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.0
+offset_top = -30.0
+offset_right = 115.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Game Made by : midsleepin
+Music Made by : aldaii
+particle_fx assets used are made by : Raphael Hatencia"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -156.0
+offset_top = 11.0
+offset_right = -4.0
+offset_bottom = 51.0
+grow_horizontal = 0
+
+[node name="Label" type="Label" parent="VBoxContainer2"]
+layout_mode = 2
+text = "Caged By Monsters :"
+
+[node name="Label2" type="Label" parent="VBoxContainer2"]
+layout_mode = 2
+text = "Boss Rush"

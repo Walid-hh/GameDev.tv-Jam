@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bly5m5wnhw5rm"]
+
+[ext_resource type="PackedScene" uid="uid://cj7x17vbiubla" path="res://Levels/boss_fight.tscn" id="1_x43yv"]
+[ext_resource type="PackedScene" uid="uid://flxuip5opyi1" path="res://Mobs/Frog/mob_frog.tscn" id="2_u0us2"]
+
+[node name="FrogBossFight" instance=ExtResource("1_x43yv")]
+
+[node name="MobFrog" parent="." index="5" instance=ExtResource("2_u0us2")]
+position = Vector2(160, 48)

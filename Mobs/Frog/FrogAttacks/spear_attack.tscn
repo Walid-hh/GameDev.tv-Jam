@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://rakraukb33wf"]
+
+[ext_resource type="Script" uid="uid://cvr4ed4ss8x4c" path="res://Common/Scripts/hit_box.gd" id="1_obqgm"]
+[ext_resource type="Script" uid="uid://bcsd2nvcp0tvs" path="res://Mobs/Frog/FrogAttacks/spear_attack.gd" id="1_uwm57"]
+[ext_resource type="Texture2D" uid="uid://bt3lksxkbdh8g" path="res://Assets/Spear.png" id="2_uwm57"]
+[ext_resource type="AudioStream" uid="uid://j7jdp7y7lqnw" path="res://Assets/Music And SFX/sfx/spear_sound.wav" id="4_aybsh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aybsh"]
+size = Vector2(7.07107, 24.7487)
+
+[node name="SpearAttack" type="Node2D"]
+rotation = 1.5708
+script = ExtResource("1_uwm57")
+
+[node name="HitBox2D" type="Area2D" parent="."]
+rotation = 0.785398
+collision_layer = 2
+script = ExtResource("1_obqgm")
+damage = 4
+damage_source = 2
+detected_hurtboxes = 1
+metadata/_custom_type_script = "uid://cvr4ed4ss8x4c"
+
+[node name="Sprite2D" type="Sprite2D" parent="HitBox2D"]
+texture = ExtResource("2_uwm57")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox2D"]
+position = Vector2(3.75, -3.75)
+rotation = 0.785398
+shape = SubResource("RectangleShape2D_aybsh")
+debug_color = Color(0.855956, 0.00780421, 0.281333, 0.42)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_aybsh")
+volume_db = -10.0
+bus = &"Sfx"

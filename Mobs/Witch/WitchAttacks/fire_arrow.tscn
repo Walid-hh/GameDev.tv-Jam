@@ -1,0 +1,109 @@
+[gd_scene load_steps=16 format=3 uid="uid://denv6covqshvf"]
+
+[ext_resource type="Script" uid="uid://belj0rxxo4yyq" path="res://Mobs/Witch/WitchAttacks/fire_arrow.gd" id="1_og1e4"]
+[ext_resource type="Script" uid="uid://cvr4ed4ss8x4c" path="res://Common/Scripts/hit_box.gd" id="2_aqobj"]
+[ext_resource type="Texture2D" uid="uid://7kfgda3es44o" path="res://Assets/VFX/Flamethrower-Sheet.png" id="3_j1nf5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q1b4v"]
+size = Vector2(40, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l0052"]
+atlas = ExtResource("3_j1nf5")
+region = Rect2(0, 0, 96, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l63qq"]
+atlas = ExtResource("3_j1nf5")
+region = Rect2(96, 0, 96, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jdtww"]
+atlas = ExtResource("3_j1nf5")
+region = Rect2(192, 0, 96, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hta7q"]
+atlas = ExtResource("3_j1nf5")
+region = Rect2(0, 48, 96, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8fnco"]
+atlas = ExtResource("3_j1nf5")
+region = Rect2(96, 48, 96, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5c1lb"]
+atlas = ExtResource("3_j1nf5")
+region = Rect2(192, 48, 96, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ey1eb"]
+atlas = ExtResource("3_j1nf5")
+region = Rect2(0, 96, 96, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xq2rg"]
+atlas = ExtResource("3_j1nf5")
+region = Rect2(96, 96, 96, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ih32c"]
+atlas = ExtResource("3_j1nf5")
+region = Rect2(192, 96, 96, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k08u3"]
+atlas = ExtResource("3_j1nf5")
+region = Rect2(0, 144, 96, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sqkbs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l0052")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l63qq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jdtww")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hta7q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8fnco")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5c1lb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ey1eb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xq2rg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ih32c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k08u3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="FireArrow" type="Node2D"]
+script = ExtResource("1_og1e4")
+
+[node name="HitBox2D" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 2
+script = ExtResource("2_aqobj")
+damage_source = 2
+detected_hurtboxes = 1
+metadata/_custom_type_script = "uid://cvr4ed4ss8x4c"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox2D"]
+position = Vector2(-20, 0)
+shape = SubResource("RectangleShape2D_q1b4v")
+debug_color = Color(0.955172, 0.149873, 0.386387, 0.42)
+
+[node name="FireArrowSprite" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+sprite_frames = SubResource("SpriteFrames_sqkbs")
+autoplay = "default"
+frame = 3
+frame_progress = 0.416042

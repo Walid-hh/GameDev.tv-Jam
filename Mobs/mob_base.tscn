@@ -1,18 +1,78 @@
-[gd_scene load_steps=42 format=3 uid="uid://hjiocyyjbqt2"]
+[gd_scene load_steps=53 format=3 uid="uid://hjiocyyjbqt2"]
 
 [ext_resource type="Script" uid="uid://dis28afvskwxt" path="res://Common/Scripts/hurt_box.gd" id="1_etq3u"]
 [ext_resource type="Script" uid="uid://bvg7tg6sa61t5" path="res://Mobs/mob_base.gd" id="1_j4182"]
 [ext_resource type="Shader" uid="uid://dwxwc2ut7royn" path="res://Common/Shaders/stagger.gdshader" id="2_8kaik"]
 [ext_resource type="Script" uid="uid://dvcyyt7vwp6ie" path="res://Common/Scripts/health_component.gd" id="2_a0ago"]
+[ext_resource type="Texture2D" uid="uid://b4s6f0m2ofgsw" path="res://Assets/VFX/Eletric Aura.png" id="3_251u2"]
 [ext_resource type="Script" uid="uid://devpe547680jy" path="res://Common/Scripts/stagger_health_component.gd" id="6_8kila"]
 [ext_resource type="Texture2D" uid="uid://di0l3mvqxqccm" path="res://Assets/VFX/Smoke2-Sheet.png" id="6_j4182"]
 [ext_resource type="Theme" uid="uid://bh8bi05f8sjo2" path="res://Common/Themes/game_theme.tres" id="7_8kila"]
+[ext_resource type="AudioStream" uid="uid://cl0wrc2ajcm6" path="res://Assets/Music And SFX/sfx/stun.wav" id="9_fctd7"]
+[ext_resource type="AudioStream" uid="uid://cu550wruxivch" path="res://Assets/Music And SFX/sfx/mob_hit.wav" id="10_52t6k"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j4182"]
 shader = ExtResource("2_8kaik")
 shader_parameter/flash_speed = 8.0
 shader_parameter/flash_intensity = 0.9
 shader_parameter/is_flashing = false
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fctd7"]
+atlas = ExtResource("3_251u2")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_52t6k"]
+atlas = ExtResource("3_251u2")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_34bic"]
+atlas = ExtResource("3_251u2")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_usjws"]
+atlas = ExtResource("3_251u2")
+region = Rect2(288, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w1x6t"]
+atlas = ExtResource("3_251u2")
+region = Rect2(384, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hokwo"]
+atlas = ExtResource("3_251u2")
+region = Rect2(0, 96, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5y1gm"]
+atlas = ExtResource("3_251u2")
+region = Rect2(96, 96, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bty54"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fctd7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_52t6k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_34bic")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_usjws")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w1x6t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hokwo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5y1gm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a2hmg"]
 atlas = ExtResource("6_j4182")
@@ -246,13 +306,24 @@ animations = [{
 "speed": 40.0
 }]
 
-[node name="MobBase" type="Node2D"]
+[node name="MobBase" type="CharacterBody2D"]
 z_index = -1
 script = ExtResource("1_j4182")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
 
 [node name="MobSprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_j4182")
+
+[node name="StunVFX" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+sprite_frames = SubResource("SpriteFrames_bty54")
+autoplay = "default"
+frame = 1
+frame_progress = 0.281331
 
 [node name="HurtBox2D" type="Area2D" parent="."]
 collision_layer = 2
@@ -293,6 +364,8 @@ frame_progress = 1.0
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Control" type="Control" parent="CanvasLayer"]
+unique_name_in_owner = true
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -315,3 +388,15 @@ layout_mode = 2
 [node name="MobStaggerBar" type="ProgressBar" parent="CanvasLayer/Control/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+
+[node name="StunSfx" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("9_fctd7")
+volume_db = -20.0
+bus = &"Sfx"
+
+[node name="TookDamage" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("10_52t6k")
+volume_db = -20.0
+bus = &"Sfx"

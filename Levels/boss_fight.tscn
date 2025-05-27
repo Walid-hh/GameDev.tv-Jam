@@ -1,0 +1,598 @@
+[gd_scene load_steps=20 format=4 uid="uid://cj7x17vbiubla"]
+
+[ext_resource type="Texture2D" uid="uid://435s6rkr3rb7" path="res://Assets/Set 1.1.png" id="1_jdiin"]
+[ext_resource type="Script" uid="uid://baldrusvxgw7d" path="res://Levels/boss_fight.gd" id="1_o0vai"]
+[ext_resource type="Texture2D" uid="uid://dsjt88jrx3pb6" path="res://Assets/BattleGround Set.png" id="2_6rm8m"]
+[ext_resource type="PackedScene" uid="uid://dkuah6lfjr8w" path="res://Player/crit_zone.tscn" id="3_4godo"]
+[ext_resource type="AudioStream" uid="uid://by2w3405fj3f8" path="res://Assets/Music And SFX/Battle_music.wav" id="4_qjrc8"]
+[ext_resource type="PackedScene" uid="uid://xlly15dedj3l" path="res://Player/player.tscn" id="5_6rm8m"]
+[ext_resource type="Theme" uid="uid://bh8bi05f8sjo2" path="res://Common/Themes/game_theme.tres" id="6_7ykiu"]
+[ext_resource type="Script" uid="uid://1cv5ify1115e" path="res://Levels/menu_controller.gd" id="6_qjrc8"]
+[ext_resource type="Shader" uid="uid://snutnctekrtn" path="res://Common/Shaders/blur_and_tint.gdshader" id="7_qjrc8"]
+[ext_resource type="Script" uid="uid://la8g5wsnpd2n" path="res://UI/settings_menu.gd" id="8_8356q"]
+[ext_resource type="Script" uid="uid://ccmvymtxepmtq" path="res://UI/pause_menu.gd" id="10_o0vai"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6rm8m"]
+texture = ExtResource("1_jdiin")
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+5:0/0/terrain_set = 0
+5:0/0/terrain = 0
+5:0/0/terrains_peering_bit/right_side = 0
+5:0/0/terrains_peering_bit/bottom_right_corner = 0
+5:0/0/terrains_peering_bit/bottom_side = 0
+6:0/0 = 0
+6:0/0/terrain_set = 0
+6:0/0/terrain = 0
+6:0/0/terrains_peering_bit/right_side = 0
+6:0/0/terrains_peering_bit/bottom_right_corner = 0
+6:0/0/terrains_peering_bit/bottom_side = 0
+6:0/0/terrains_peering_bit/bottom_left_corner = 0
+6:0/0/terrains_peering_bit/left_side = 0
+7:0/0 = 0
+7:0/0/terrain_set = 0
+7:0/0/terrain = 0
+7:0/0/terrains_peering_bit/bottom_side = 0
+7:0/0/terrains_peering_bit/bottom_left_corner = 0
+7:0/0/terrains_peering_bit/left_side = 0
+8:0/0 = 0
+9:0/0 = 0
+10:0/0 = 0
+11:0/0 = 0
+12:0/0 = 0
+13:0/0 = 0
+14:0/0 = 0
+15:0/0 = 0
+16:0/0 = 0
+17:0/0 = 0
+18:0/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+5:1/0/terrain_set = 0
+5:1/0/terrain = 0
+5:1/0/terrains_peering_bit/right_side = 0
+5:1/0/terrains_peering_bit/bottom_right_corner = 0
+5:1/0/terrains_peering_bit/bottom_side = 0
+5:1/0/terrains_peering_bit/top_side = 0
+5:1/0/terrains_peering_bit/top_right_corner = 0
+6:1/0 = 0
+6:1/0/terrain_set = 0
+6:1/0/terrain = 0
+6:1/0/terrains_peering_bit/right_side = 0
+6:1/0/terrains_peering_bit/bottom_right_corner = 0
+6:1/0/terrains_peering_bit/bottom_side = 0
+6:1/0/terrains_peering_bit/bottom_left_corner = 0
+6:1/0/terrains_peering_bit/left_side = 0
+6:1/0/terrains_peering_bit/top_left_corner = 0
+6:1/0/terrains_peering_bit/top_side = 0
+6:1/0/terrains_peering_bit/top_right_corner = 0
+7:1/0 = 0
+7:1/0/terrain_set = 0
+7:1/0/terrain = 0
+7:1/0/terrains_peering_bit/bottom_side = 0
+7:1/0/terrains_peering_bit/bottom_left_corner = 0
+7:1/0/terrains_peering_bit/left_side = 0
+7:1/0/terrains_peering_bit/top_left_corner = 0
+7:1/0/terrains_peering_bit/top_side = 0
+8:1/0 = 0
+9:1/0 = 0
+10:1/0 = 0
+11:1/0 = 0
+12:1/0 = 0
+13:1/0 = 0
+14:1/0 = 0
+15:1/0 = 0
+16:1/0 = 0
+17:1/0 = 0
+18:1/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+5:2/0/terrain_set = 0
+5:2/0/terrain = 0
+5:2/0/terrains_peering_bit/right_side = 0
+5:2/0/terrains_peering_bit/top_side = 0
+5:2/0/terrains_peering_bit/top_right_corner = 0
+6:2/0 = 0
+6:2/0/terrain_set = 0
+6:2/0/terrain = 0
+6:2/0/terrains_peering_bit/right_side = 0
+6:2/0/terrains_peering_bit/left_side = 0
+6:2/0/terrains_peering_bit/top_left_corner = 0
+6:2/0/terrains_peering_bit/top_side = 0
+6:2/0/terrains_peering_bit/top_right_corner = 0
+7:2/0 = 0
+7:2/0/terrain_set = 0
+7:2/0/terrain = 0
+7:2/0/terrains_peering_bit/left_side = 0
+7:2/0/terrains_peering_bit/top_left_corner = 0
+7:2/0/terrains_peering_bit/top_side = 0
+8:2/0 = 0
+9:2/0 = 0
+10:2/0 = 0
+11:2/0 = 0
+12:2/0 = 0
+13:2/0 = 0
+14:2/0 = 0
+15:2/0 = 0
+16:2/0 = 0
+17:2/0 = 0
+18:2/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+7:3/0 = 0
+8:3/0 = 0
+9:3/0 = 0
+10:3/0 = 0
+11:3/0 = 0
+12:3/0 = 0
+13:3/0 = 0
+14:3/0 = 0
+15:3/0 = 0
+16:3/0 = 0
+17:3/0 = 0
+18:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+6:4/0 = 0
+7:4/0 = 0
+8:4/0 = 0
+9:4/0 = 0
+10:4/0 = 0
+11:4/0 = 0
+12:4/0 = 0
+13:4/0 = 0
+14:4/0 = 0
+15:4/0 = 0
+17:4/0 = 0
+18:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+6:5/0 = 0
+7:5/0 = 0
+8:5/0 = 0
+9:5/0 = 0
+10:5/0 = 0
+11:5/0 = 0
+12:5/0 = 0
+13:5/0 = 0
+14:5/0 = 0
+15:5/0 = 0
+16:5/0 = 0
+17:5/0 = 0
+18:5/0 = 0
+0:6/0 = 0
+1:6/0 = 0
+2:6/0 = 0
+3:6/0 = 0
+4:6/0 = 0
+5:6/0 = 0
+6:6/0 = 0
+7:6/0 = 0
+8:6/0 = 0
+9:6/0 = 0
+10:6/0 = 0
+11:6/0 = 0
+12:6/0 = 0
+13:6/0 = 0
+14:6/0 = 0
+15:6/0 = 0
+16:6/0 = 0
+17:6/0 = 0
+18:6/0 = 0
+4:7/0 = 0
+5:7/0 = 0
+6:7/0 = 0
+11:7/0 = 0
+12:7/0 = 0
+13:7/0 = 0
+14:7/0 = 0
+15:7/0 = 0
+11:8/0 = 0
+12:8/0 = 0
+13:8/0 = 0
+14:8/0 = 0
+13:9/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_0h5bq"]
+terrain_set_0/mode = 0
+terrain_set_0/terrain_0/name = "Terrain 0"
+terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
+sources/0 = SubResource("TileSetAtlasSource_6rm8m")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4godo"]
+texture = ExtResource("2_6rm8m")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+3:0/0/terrain_set = 0
+4:0/0 = 0
+4:0/0/terrain_set = 0
+5:0/0 = 0
+5:0/0/terrain_set = 0
+6:0/0 = 0
+7:0/0 = 0
+0:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+3:1/0/terrain_set = 0
+4:1/0 = 0
+4:1/0/terrain_set = 0
+5:1/0 = 0
+5:1/0/terrain_set = 0
+6:1/0 = 0
+7:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+3:2/0/terrain_set = 0
+4:2/0 = 0
+4:2/0/terrain_set = 0
+5:2/0 = 0
+5:2/0/terrain_set = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+3:3/0/terrain_set = 0
+4:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+7:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+6:4/0 = 0
+7:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+6:5/0 = 0
+7:5/0 = 0
+8:5/0 = 0
+0:6/0 = 0
+1:6/0 = 0
+2:6/0 = 0
+3:6/0 = 0
+4:6/0 = 0
+5:6/0 = 0
+6:6/0 = 0
+7:6/0 = 0
+8:6/0 = 0
+3:7/0 = 0
+4:7/0 = 0
+5:7/0 = 0
+3:8/0 = 0
+4:8/0 = 0
+5:8/0 = 0
+0:9/0 = 0
+1:9/0 = 0
+2:9/0 = 0
+3:9/0 = 0
+3:9/0/terrain_set = 0
+3:9/0/terrain = 0
+3:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3.95689, -4.13675, 8, -4.31661, 8, -2.1583, -1.97845, -1.97845, -2.1583, 8, -3.77703, 8)
+3:9/0/terrains_peering_bit/right_side = 0
+3:9/0/terrains_peering_bit/bottom_right_corner = 0
+3:9/0/terrains_peering_bit/bottom_side = 0
+4:9/0 = 0
+4:9/0/terrain_set = 0
+4:9/0/terrain = 0
+4:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -4.13675, 8, -4.31661, 8, -2.1583, -8, -1.97845)
+4:9/0/terrains_peering_bit/right_side = 0
+4:9/0/terrains_peering_bit/bottom_right_corner = 0
+4:9/0/terrains_peering_bit/bottom_side = 0
+4:9/0/terrains_peering_bit/bottom_left_corner = 0
+4:9/0/terrains_peering_bit/left_side = 0
+5:9/0 = 0
+5:9/0/terrain_set = 0
+5:9/0/terrain = 0
+5:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(4.13675, -3.95689, 4.31661, 8, 2.1583, 8, 1.97845, -1.97845, -8, -2.1583, -8, -3.77703)
+5:9/0/terrains_peering_bit/bottom_side = 0
+5:9/0/terrains_peering_bit/bottom_left_corner = 0
+5:9/0/terrains_peering_bit/left_side = 0
+0:10/0 = 0
+1:10/0 = 0
+2:10/0 = 0
+3:10/0 = 0
+3:10/0/terrain_set = 0
+3:10/0/terrain = 0
+3:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3.77703, -8, -1.79859, -8, -1.97845, 8, -3.95689, 8)
+3:10/0/terrains_peering_bit/right_side = 0
+3:10/0/terrains_peering_bit/bottom_right_corner = 0
+3:10/0/terrains_peering_bit/bottom_side = 0
+3:10/0/terrains_peering_bit/top_side = 0
+3:10/0/terrains_peering_bit/top_right_corner = 0
+4:10/0 = 0
+4:10/0/terrain_set = 0
+4:10/0/terrain = 0
+4:10/0/terrains_peering_bit/right_side = 0
+4:10/0/terrains_peering_bit/bottom_right_corner = 0
+4:10/0/terrains_peering_bit/bottom_side = 0
+4:10/0/terrains_peering_bit/bottom_left_corner = 0
+4:10/0/terrains_peering_bit/left_side = 0
+4:10/0/terrains_peering_bit/top_left_corner = 0
+4:10/0/terrains_peering_bit/top_side = 0
+4:10/0/terrains_peering_bit/top_right_corner = 0
+5:10/0 = 0
+5:10/0/terrain_set = 0
+5:10/0/terrain = 0
+5:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(3.77703, 8, 1.79859, 8, 1.97845, -8, 3.95689, -8)
+5:10/0/terrains_peering_bit/bottom_side = 0
+5:10/0/terrains_peering_bit/bottom_left_corner = 0
+5:10/0/terrains_peering_bit/left_side = 0
+5:10/0/terrains_peering_bit/top_left_corner = 0
+5:10/0/terrains_peering_bit/top_side = 0
+3:11/0 = 0
+3:11/0/terrain_set = 0
+3:11/0/terrain = 0
+3:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4.13675, 3.95689, -4.31661, -8, -2.1583, -8, -1.97845, 1.97845, 8, 2.1583, 8, 3.77703)
+3:11/0/terrains_peering_bit/right_side = 0
+3:11/0/terrains_peering_bit/top_side = 0
+3:11/0/terrains_peering_bit/top_right_corner = 0
+4:11/0 = 0
+4:11/0/terrain_set = 0
+4:11/0/terrain = 0
+4:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 3.77703, -8, 1.79859, 8, 1.97845, 8, 3.95689)
+4:11/0/terrains_peering_bit/right_side = 0
+4:11/0/terrains_peering_bit/left_side = 0
+4:11/0/terrains_peering_bit/top_left_corner = 0
+4:11/0/terrains_peering_bit/top_side = 0
+4:11/0/terrains_peering_bit/top_right_corner = 0
+5:11/0 = 0
+5:11/0/terrain_set = 0
+5:11/0/terrain = 0
+5:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(3.95689, 4.13675, -8, 4.31661, -8, 2.1583, 1.97845, 1.97845, 2.1583, -8, 3.77703, -8)
+5:11/0/terrains_peering_bit/left_side = 0
+5:11/0/terrains_peering_bit/top_left_corner = 0
+5:11/0/terrains_peering_bit/top_side = 0
+
+[sub_resource type="TileSet" id="TileSet_v2uok"]
+physics_layer_0/collision_layer = 1
+terrain_set_0/mode = 0
+terrain_set_0/terrain_0/name = "Terrain 0"
+terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
+sources/0 = SubResource("TileSetAtlasSource_4godo")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7ykiu"]
+shader = ExtResource("7_qjrc8")
+shader_parameter/blur_amount = 0.7
+shader_parameter/tint = Color(0.000999787, 0.0320779, 0.104032, 1)
+shader_parameter/tint_strength = 0.4
+shader_parameter/saturation = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lwrmd"]
+shader = ExtResource("7_qjrc8")
+shader_parameter/blur_amount = 0.0
+shader_parameter/tint = Color(0.000528903, 0.0273524, 0.202627, 1)
+shader_parameter/tint_strength = 0.71
+shader_parameter/saturation = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8356q"]
+shader = ExtResource("7_qjrc8")
+shader_parameter/blur_amount = 0.7
+shader_parameter/tint = Color(0.000999787, 0.0320779, 0.104032, 1)
+shader_parameter/tint_strength = 0.4
+shader_parameter/saturation = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o0vai"]
+shader = ExtResource("7_qjrc8")
+shader_parameter/blur_amount = 0.0
+shader_parameter/tint = Color(0.000528903, 0.0273524, 0.202627, 1)
+shader_parameter/tint_strength = 0.71
+shader_parameter/saturation = 1.0
+
+[node name="BossFight" type="Node"]
+process_mode = 1
+script = ExtResource("1_o0vai")
+
+[node name="TileMapLayer2" type="TileMapLayer" parent="."]
+z_index = -2
+tile_map_data = PackedByteArray("AAAAAAAAAAAFAAAAAAAAAAEAAAAFAAEAAAAAAAIAAAAFAAEAAAAAAAMAAAAFAAEAAAAAAAQAAAAFAAEAAAAAAAUAAAAFAAEAAAAAAAYAAAAFAAEAAAAAAAcAAAAFAAEAAAAAAAgAAAAFAAEAAAAAAAkAAAAFAAEAAAAAAAoAAAAFAAEAAAAAAAsAAAAFAAIAAAABAAsAAAAGAAIAAAACAAsAAAAGAAIAAAADAAsAAAAGAAIAAAAEAAsAAAAGAAIAAAAFAAsAAAAGAAIAAAAGAAsAAAAGAAIAAAAHAAsAAAAGAAIAAAAIAAsAAAAGAAIAAAAJAAsAAAAGAAIAAAAKAAsAAAAGAAIAAAALAAsAAAAGAAIAAAAMAAsAAAAGAAIAAAANAAsAAAAGAAIAAAAOAAsAAAAGAAIAAAAPAAsAAAAGAAIAAAAQAAsAAAAGAAIAAAARAAsAAAAGAAIAAAASAAsAAAAGAAIAAAATAAsAAAAHAAIAAAATAAoAAAAHAAEAAAATAAkAAAAHAAEAAAATAAgAAAAHAAEAAAATAAcAAAAHAAEAAAATAAYAAAAHAAEAAAATAAUAAAAHAAEAAAATAAQAAAAHAAEAAAATAAMAAAAHAAEAAAATAAIAAAAHAAEAAAATAAEAAAAHAAEAAAATAAAAAAAHAAAAAAASAAAAAAAGAAAAAAARAAAAAAAGAAAAAAAQAAAAAAAGAAAAAAAPAAAAAAAGAAAAAAAOAAAAAAAGAAAAAAANAAAAAAAGAAAAAAAMAAAAAAAGAAAAAAALAAAAAAAGAAAAAAAKAAAAAAAGAAAAAAAJAAAAAAAGAAAAAAAIAAAAAAAGAAAAAAAHAAAAAAAGAAAAAAAGAAAAAAAGAAAAAAAFAAAAAAAGAAAAAAAEAAAAAAAGAAAAAAADAAAAAAAGAAAAAAACAAAAAAAGAAAAAAABAAAAAAAGAAAAAAABAAEAAAAGAAEAAAABAAIAAAAGAAEAAAABAAMAAAAGAAEAAAABAAQAAAAGAAEAAAABAAUAAAAGAAEAAAABAAYAAAAGAAEAAAABAAcAAAAGAAEAAAABAAgAAAAGAAEAAAABAAkAAAAGAAEAAAABAAoAAAAGAAEAAAACAAoAAAAGAAEAAAACAAkAAAAGAAEAAAACAAgAAAAGAAEAAAACAAcAAAAGAAEAAAACAAYAAAAGAAEAAAADAAkAAAAGAAEAAAADAAoAAAAGAAEAAAADAAgAAAAGAAEAAAADAAcAAAAGAAEAAAACAAUAAAAGAAEAAAACAAQAAAAGAAEAAAACAAMAAAAGAAEAAAACAAIAAAAGAAEAAAACAAEAAAAGAAEAAAADAAEAAAAGAAEAAAAEAAEAAAAGAAEAAAAFAAEAAAAGAAEAAAAGAAEAAAAGAAEAAAAHAAEAAAAGAAEAAAAIAAEAAAAGAAEAAAAJAAEAAAAGAAEAAAAKAAEAAAAGAAEAAAALAAEAAAAGAAEAAAAMAAEAAAAGAAEAAAANAAEAAAAGAAEAAAAOAAEAAAAGAAEAAAAPAAEAAAAGAAEAAAAQAAEAAAAGAAEAAAARAAEAAAAGAAEAAAASAAEAAAAGAAEAAAASAAIAAAAGAAEAAAASAAMAAAAGAAEAAAASAAQAAAAGAAEAAAASAAUAAAAGAAEAAAASAAYAAAAGAAEAAAASAAcAAAAGAAEAAAASAAgAAAAGAAEAAAASAAkAAAAGAAEAAAASAAoAAAAGAAEAAAARAAoAAAAGAAEAAAARAAkAAAAGAAEAAAARAAgAAAAGAAEAAAARAAcAAAAGAAEAAAARAAYAAAAGAAEAAAARAAUAAAAGAAEAAAARAAQAAAAGAAEAAAARAAMAAAAGAAEAAAARAAIAAAAGAAEAAAAQAAIAAAAGAAEAAAAPAAIAAAAGAAEAAAAOAAIAAAAGAAEAAAANAAIAAAAGAAEAAAAMAAIAAAAGAAEAAAALAAIAAAAGAAEAAAAKAAIAAAAGAAEAAAAJAAIAAAAGAAEAAAAIAAIAAAAGAAEAAAAHAAIAAAAGAAEAAAAGAAIAAAAGAAEAAAAFAAIAAAAGAAEAAAAEAAIAAAAGAAEAAAADAAIAAAAGAAEAAAADAAMAAAAGAAEAAAADAAQAAAAGAAEAAAADAAUAAAAGAAEAAAADAAYAAAAGAAEAAAAEAAoAAAAGAAEAAAAFAAoAAAAGAAEAAAAGAAoAAAAGAAEAAAAHAAoAAAAGAAEAAAAIAAoAAAAGAAEAAAAJAAoAAAAGAAEAAAAKAAoAAAAGAAEAAAALAAoAAAAGAAEAAAAMAAoAAAAGAAEAAAANAAoAAAAGAAEAAAAOAAoAAAAGAAEAAAAPAAoAAAAGAAEAAAAQAAoAAAAGAAEAAAAQAAkAAAAGAAEAAAAQAAgAAAAGAAEAAAAQAAcAAAAGAAEAAAAQAAUAAAAGAAEAAAAQAAQAAAAGAAEAAAAQAAMAAAAGAAEAAAAQAAYAAAAGAAEAAAAPAAQAAAAGAAEAAAAPAAMAAAAGAAEAAAAPAAUAAAAGAAEAAAAPAAYAAAAGAAEAAAAPAAcAAAAGAAEAAAAPAAgAAAAGAAEAAAAPAAkAAAAGAAEAAAAOAAkAAAAGAAEAAAAOAAgAAAAGAAEAAAAOAAcAAAAGAAEAAAAOAAYAAAAGAAEAAAAOAAUAAAAGAAEAAAAOAAQAAAAGAAEAAAAOAAMAAAAGAAEAAAANAAMAAAAGAAEAAAANAAQAAAAGAAEAAAANAAUAAAAGAAEAAAANAAYAAAAGAAEAAAANAAcAAAAGAAEAAAANAAgAAAAGAAEAAAAMAAgAAAAGAAEAAAAMAAkAAAAGAAEAAAANAAkAAAAGAAEAAAALAAkAAAAGAAEAAAAKAAkAAAAGAAEAAAAJAAkAAAAGAAEAAAAIAAkAAAAGAAEAAAAHAAkAAAAGAAEAAAAGAAkAAAAGAAEAAAAFAAkAAAAGAAEAAAAEAAkAAAAGAAEAAAAEAAgAAAAGAAEAAAAEAAcAAAAGAAEAAAAEAAYAAAAGAAEAAAAEAAUAAAAGAAEAAAAEAAQAAAAGAAEAAAAEAAMAAAAGAAEAAAAFAAYAAAAGAAEAAAAFAAcAAAAGAAEAAAAFAAgAAAAGAAEAAAAGAAgAAAAGAAEAAAAHAAgAAAAGAAEAAAAIAAgAAAAGAAEAAAAJAAgAAAAGAAEAAAAKAAgAAAAGAAEAAAALAAgAAAAGAAEAAAALAAcAAAAGAAEAAAAKAAcAAAAGAAEAAAAJAAcAAAAGAAEAAAAIAAcAAAAGAAEAAAAHAAcAAAAGAAEAAAAGAAcAAAAGAAEAAAAMAAcAAAAGAAEAAAAJAAYAAAAGAAEAAAAIAAYAAAAGAAEAAAAHAAYAAAAGAAEAAAAGAAYAAAAGAAEAAAAKAAYAAAAGAAEAAAALAAYAAAAGAAEAAAAGAAUAAAAGAAEAAAAFAAUAAAAGAAEAAAAHAAUAAAAGAAEAAAAIAAUAAAAGAAEAAAAJAAUAAAAGAAEAAAAKAAUAAAAGAAEAAAALAAUAAAAGAAEAAAAMAAUAAAAGAAEAAAAMAAYAAAAGAAEAAAALAAQAAAAGAAEAAAAMAAQAAAAGAAEAAAAFAAQAAAAGAAEAAAAGAAQAAAAGAAEAAAAHAAQAAAAGAAEAAAAIAAQAAAAGAAEAAAAJAAQAAAAGAAEAAAAKAAQAAAAGAAEAAAAFAAMAAAAGAAEAAAAGAAMAAAAGAAEAAAAHAAMAAAAGAAEAAAAIAAMAAAAGAAEAAAALAAMAAAAGAAEAAAAKAAMAAAAGAAEAAAAJAAMAAAAGAAEAAAAMAAMAAAAGAAEAAAA=")
+tile_set = SubResource("TileSet_0h5bq")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAEAAUAAAADAAoAAAAEAAYAAAADAAoAAAAEAAcAAAADAAoAAAAFAAcAAAAEAAoAAAAFAAgAAAAEAAoAAAAEAAgAAAADAAoAAAAPAAYAAAAFAAoAAAAPAAcAAAAFAAoAAAAPAAgAAAAFAAoAAAAOAAgAAAAEAAoAAAANAAgAAAAEAAoAAAAMAAgAAAAEAAoAAAALAAgAAAAEAAoAAAAKAAgAAAAEAAoAAAAJAAgAAAAEAAoAAAAIAAgAAAAEAAoAAAAHAAgAAAAEAAoAAAAGAAgAAAAEAAoAAAAGAAcAAAAEAAoAAAAHAAcAAAAEAAoAAAAIAAcAAAAEAAoAAAAGAAYAAAAEAAoAAAAFAAYAAAAEAAoAAAAFAAUAAAAEAAoAAAAFAAQAAAAEAAkAAAAEAAQAAAADAAkAAAAGAAUAAAAEAAoAAAAHAAUAAAAEAAoAAAAIAAUAAAAEAAoAAAAGAAQAAAAEAAkAAAAHAAQAAAAEAAkAAAAIAAQAAAAEAAkAAAAJAAQAAAAEAAkAAAAKAAQAAAAEAAkAAAALAAUAAAAEAAoAAAAMAAUAAAAEAAoAAAANAAUAAAAEAAoAAAAMAAYAAAAEAAoAAAALAAYAAAAEAAoAAAAKAAYAAAAEAAoAAAAJAAYAAAAEAAoAAAAIAAYAAAAEAAoAAAAHAAYAAAAEAAoAAAAJAAcAAAAEAAoAAAAKAAcAAAAEAAoAAAALAAcAAAAEAAoAAAAMAAcAAAAEAAoAAAANAAcAAAAEAAoAAAAOAAcAAAAEAAoAAAAOAAYAAAAEAAoAAAANAAYAAAAEAAoAAAAOAAUAAAAEAAoAAAAPAAUAAAAFAAoAAAAPAAQAAAAFAAkAAAAOAAQAAAAEAAkAAAANAAQAAAAEAAkAAAAMAAQAAAAEAAkAAAALAAQAAAAEAAkAAAAKAAUAAAAEAAoAAAAJAAUAAAAEAAoAAAAEAAoAAAADAAsAAAAFAAoAAAAEAAsAAAAGAAoAAAAEAAsAAAAHAAoAAAAEAAsAAAAIAAoAAAAEAAsAAAAJAAoAAAAEAAsAAAAKAAoAAAAEAAsAAAALAAoAAAAEAAsAAAAMAAoAAAAEAAsAAAANAAoAAAAEAAsAAAAOAAoAAAAEAAsAAAAPAAoAAAAFAAsAAAAPAAkAAAAFAAoAAAAOAAkAAAAEAAoAAAANAAkAAAAEAAoAAAAMAAkAAAAEAAoAAAALAAkAAAAEAAoAAAAKAAkAAAAEAAoAAAAJAAkAAAAEAAoAAAAIAAkAAAAEAAoAAAAHAAkAAAAEAAoAAAAGAAkAAAAEAAoAAAAFAAkAAAAEAAoAAAAEAAkAAAADAAoAAAA=")
+tile_set = SubResource("TileSet_v2uok")
+
+[node name="CritZone" parent="." instance=ExtResource("3_4godo")]
+position = Vector2(161, 72)
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_qjrc8")
+volume_db = -20.0
+autoplay = true
+bus = &"Music"
+
+[node name="Player" parent="." instance=ExtResource("5_6rm8m")]
+position = Vector2(160, 120)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 3
+
+[node name="MenuController" type="Control" parent="CanvasLayer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("6_7ykiu")
+script = ExtResource("6_qjrc8")
+
+[node name="SettingsMenu" type="Control" parent="CanvasLayer/MenuController"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 0
+script = ExtResource("8_8356q")
+
+[node name="Blur2" type="ColorRect" parent="CanvasLayer/MenuController/SettingsMenu"]
+material = SubResource("ShaderMaterial_7ykiu")
+layout_mode = 0
+offset_top = 3.0
+offset_right = 320.0
+offset_bottom = 183.0
+
+[node name="Containerbackground" type="ColorRect" parent="CanvasLayer/MenuController/SettingsMenu"]
+material = SubResource("ShaderMaterial_lwrmd")
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 47.751
+anchor_bottom = 26.899
+offset_right = 320.0
+offset_bottom = 180.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MenuController/SettingsMenu/Containerbackground"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.078
+anchor_right = 1.0
+anchor_bottom = 0.849
+offset_left = 64.0
+offset_top = 17.96
+offset_right = -56.0
+offset_bottom = 7.18001
+
+[node name="Label" type="Label" parent="CanvasLayer/MenuController/SettingsMenu/Containerbackground/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+size_flags_stretch_ratio = 0.4
+theme_override_colors/font_color = Color(0.501961, 0.768627, 0.815686, 1)
+text = "Settings"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MenuController/SettingsMenu/Containerbackground/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/MenuController/SettingsMenu/Containerbackground/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/MenuController/SettingsMenu/Containerbackground/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.501961, 0.768627, 0.815686, 1)
+text = "Music"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="CanvasLayer/MenuController/SettingsMenu/Containerbackground/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.501961, 0.768627, 0.815686, 1)
+text = "Sfx
+"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MenuController/SettingsMenu/Containerbackground/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MusicSlider" type="HSlider" parent="CanvasLayer/MenuController/SettingsMenu/Containerbackground/VBoxContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+min_value = -50.0
+max_value = 0.0
+
+[node name="SfxSlider" type="HSlider" parent="CanvasLayer/MenuController/SettingsMenu/Containerbackground/VBoxContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 6
+min_value = -80.0
+max_value = 0.0
+
+[node name="MenuButton" type="Button" parent="CanvasLayer/MenuController/SettingsMenu/Containerbackground/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.3
+text = "Return Menu"
+
+[node name="PauseMenu" type="Control" parent="CanvasLayer/MenuController"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 0
+script = ExtResource("10_o0vai")
+
+[node name="Blur" type="ColorRect" parent="CanvasLayer/MenuController/PauseMenu"]
+material = SubResource("ShaderMaterial_8356q")
+layout_mode = 0
+offset_top = 3.0
+offset_right = 320.0
+offset_bottom = 183.0
+
+[node name="Containerbackground" type="ColorRect" parent="CanvasLayer/MenuController/PauseMenu"]
+material = SubResource("ShaderMaterial_o0vai")
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 47.94
+anchor_bottom = 27.025
+offset_right = 320.0
+offset_bottom = 180.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MenuController/PauseMenu/Containerbackground"]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_top = 24.0
+offset_right = -56.0
+offset_bottom = -28.0
+
+[node name="Label" type="Label" parent="CanvasLayer/MenuController/PauseMenu/Containerbackground/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.55
+theme_override_colors/font_color = Color(0.501961, 0.768627, 0.815686, 1)
+text = "Pause Menu"
+
+[node name="SettingsButton" type="Button" parent="CanvasLayer/MenuController/PauseMenu/Containerbackground/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+text = "Settings"
+
+[node name="ResumeButton" type="Button" parent="CanvasLayer/MenuController/PauseMenu/Containerbackground/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+text = "Resume"
+
+[node name="Exit" type="Button" parent="CanvasLayer/MenuController/PauseMenu/Containerbackground/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+text = "Exit"

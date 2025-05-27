@@ -1,4 +1,4 @@
-[gd_scene load_steps=215 format=3 uid="uid://xlly15dedj3l"]
+[gd_scene load_steps=218 format=3 uid="uid://xlly15dedj3l"]
 
 [ext_resource type="Script" uid="uid://y7oa0v8polrj" path="res://Player/player.gd" id="1_gwnis"]
 [ext_resource type="Texture2D" uid="uid://cykp5ht3jwxlq" path="res://Assets/DG Asha Character/Blue Asha Idle 32x32.png" id="1_l8h54"]
@@ -13,9 +13,12 @@
 [ext_resource type="PackedScene" uid="uid://7s4877053gps" path="res://Player/Weapons/bow.tscn" id="8_00tjw"]
 [ext_resource type="PackedScene" uid="uid://uif4ojw374ne" path="res://Player/Projectiles/projectile.tscn" id="9_00tjw"]
 [ext_resource type="Theme" uid="uid://bh8bi05f8sjo2" path="res://Common/Themes/game_theme.tres" id="10_p5o4e"]
-[ext_resource type="Texture2D" uid="uid://wnshvgl724tt" path="res://Assets/Icons/heal_icon.png" id="14_dkpta"]
+[ext_resource type="Script" uid="uid://bftp6rq17esif" path="res://Player/stun_gauge.gd" id="11_pisgm"]
 [ext_resource type="Shader" uid="uid://dfab5fjxu1y83" path="res://Common/Shaders/screen_shake.gdshader" id="14_gu6f8"]
 [ext_resource type="Texture2D" uid="uid://cxsjim8bxqtev" path="res://Assets/Icons/Icon 11.png" id="15_lfmf2"]
+[ext_resource type="Texture2D" uid="uid://bbsgaqk5o7s2c" path="res://Assets/Icons/Icon 2.png" id="15_pisgm"]
+[ext_resource type="AudioStream" uid="uid://2tuax4jscxu1" path="res://Assets/Music And SFX/sfx/sword.wav" id="18_b1ygp"]
+[ext_resource type="AudioStream" uid="uid://bor14wjpxjg32" path="res://Assets/Music And SFX/sfx/took_damage.wav" id="19_o28un"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_apopc"]
 shader = ExtResource("2_x3vf3")
@@ -1483,7 +1486,7 @@ shader_parameter/FactorB = Vector2(1, 1)
 shader_parameter/magnitude = Vector2(0.01, 0.01)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pisgm"]
-bg_color = Color(0, 0.670588, 0.796078, 0.662745)
+bg_color = Color(0, 0.670588, 0.796078, 0.32549)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -1495,14 +1498,16 @@ expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b1ygp"]
-bg_color = Color(0.0166918, 0.445877, 0.780403, 1)
+bg_color = Color(0.540733, 0.761157, 0.998317, 1)
 border_color = Color(0, 0, 0, 1)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("health_component", "weapon", "debug_label")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("health_component", "stun_gauge", "weapon", "debug_label")]
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_gwnis")
+max_health = 30
 health_component = NodePath("HealthComponent")
+stun_gauge = NodePath("StunGauge")
 weapon = NodePath("Anchor/Bow")
 hit_stop_duration = 1.0
 hit_stop_strength = 0.2
@@ -1512,9 +1517,8 @@ debug_label = NodePath("Label")
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_apopc")
 sprite_frames = SubResource("SpriteFrames_jp1hh")
-animation = &"crit_attack"
-frame = 7
-frame_progress = 0.344696
+animation = &"idle_down"
+autoplay = "idle_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3)
@@ -1535,6 +1539,9 @@ debug_color = Color(0.138852, 0.605918, 0.297189, 0.42)
 script = ExtResource("3_btcbx")
 hurt_box = NodePath("../HurtBox2D")
 metadata/_custom_type_script = "uid://dvcyyt7vwp6ie"
+
+[node name="StunGauge" type="Node2D" parent="."]
+script = ExtResource("11_pisgm")
 
 [node name="Label" type="Label" parent="."]
 offset_left = -17.0
@@ -1566,6 +1573,7 @@ grow_vertical = 2
 
 [node name="CombatUI" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
+visible = false
 
 [node name="Control" type="Control" parent="CombatUI"]
 layout_mode = 3
@@ -1592,7 +1600,7 @@ layout_mode = 2
 
 [node name="HealItem" type="TextureRect" parent="CombatUI/Control/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-texture = ExtResource("14_dkpta")
+texture = ExtResource("15_pisgm")
 
 [node name="HealCount" type="Label" parent="CombatUI/Control/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
@@ -1634,7 +1642,20 @@ layout_mode = 2
 text = ":"
 
 [node name="ThunderBar" type="ProgressBar" parent="CombatUI/Control/VBoxContainer2"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_pisgm")
 theme_override_styles/fill = SubResource("StyleBoxFlat_b1ygp")
 show_percentage = false
+
+[node name="swordsfx" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("18_b1ygp")
+volume_db = -20.0
+bus = &"Sfx"
+
+[node name="tookdamage" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("19_o28un")
+volume_db = -20.0
+bus = &"Sfx"

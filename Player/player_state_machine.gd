@@ -17,7 +17,6 @@ class StateMachine extends Node:
 
 	func _ready() -> void:
 		set_physics_process(false)
-		#Blackboard.player_died.connect(trigger_event.bind(AI.Events.PLAYER_DIED))
 
 	func set_is_debugging(new_value : bool) -> void :
 		is_debugging = new_value
@@ -71,6 +70,8 @@ class StateMachine extends Node:
 
 	func trigger_event(event: Events) -> void:
 		if not current_state in transitions:
+			return
+		if current_state.has_method("should_ignore_event") and current_state.should_ignore_event(event):
 			return
 		if not transitions[current_state].has(event):
 			print_debug(
@@ -148,6 +149,8 @@ class StateSafe extends State :
 	func _init(_init_player : Player) -> void:
 		super("Safe" , _init_player)
 	
+	func enter():
+		player.combat_ui.visible = false
 	
 	func update(delta) -> Events:
 		var direction : Vector2
@@ -170,6 +173,7 @@ class StateSafe extends State :
 		return Events.NONE
 
 
+
 class StateCombat extends State :
 	var speed := 0
 	var weapon : Weapon
@@ -179,11 +183,22 @@ class StateCombat extends State :
 	func _init(init_player : Player , init_weapon : Weapon) -> void:
 		super("Combat" , init_player)
 		weapon = init_weapon
+
+	
+	func enter():
+		#Global.mob_died.connect(func(mob):
+			#finished.emit())
+		player.combat_ui.visible = true
 	
 	func update(delta) -> Events:
 		if Input.is_action_just_pressed("shoot") and player.crit_attack :
+			player.thunder_charges += 1
 			return Events.CRIT_ATTACK
+		if Input.is_action_just_pressed("stun") and player.thunder_charges > 0 and not is_shooting:
+			player.thunder_charges -= 1
+			Global.stun.emit()
 		if Input.is_action_just_pressed("shoot") and not is_shooting:
+			player.stun_gauge.value += 4
 			player.player_sprite.play("idle" + str(player.direction_text))
 			is_shooting = true
 			weapon.set_physics_process(true)
@@ -218,7 +233,7 @@ class StateStagger extends State :
 		super("Staggered" , init_player)
 	
 	func enter():
-
+		player.tookdamage.play()
 		player_initial_position = Global.player_position
 		player.player_sprite.play("hurt" + str(player.direction_text))
 		player.player_sprite.material.set_shader_parameter("is_flashing" , true)
@@ -255,6 +270,7 @@ class StateCritAttack extends State :
 	func crit_land() -> void :
 			player.apply_hit_stop()
 			Global.crit_landed.emit()
+			player.swordsfx.play()
 			finished.emit()
 
 class StateDie extends State :
@@ -262,6 +278,10 @@ class StateDie extends State :
 	func _init(init_player : Player) -> void :
 		super("die" , init_player)
 	
+	func should_ignore_event(event: Events) -> bool:
+		return event == Events.HEALTH_DEPLETED
+	
 	func enter():
-		Global.player_died.emit()
 		player.player_sprite.play("die" + str(player.direction_text))
+		player.player_sprite.animation_finished.connect(Global.player_died.emit)
+	

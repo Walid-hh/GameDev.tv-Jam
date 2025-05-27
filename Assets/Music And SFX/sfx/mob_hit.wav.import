@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cu550wruxivch"
+path="res://.godot/imported/mob_hit.wav-a56be00d4e475a2f7c3eae86c3f0d595.sample"
+
+[deps]
+
+source_file="res://Assets/Music And SFX/sfx/mob_hit.wav"
+dest_files=["res://.godot/imported/mob_hit.wav-a56be00d4e475a2f7c3eae86c3f0d595.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -10,6 +10,7 @@ enum Events {
 	ATTACK_ONE,
 	ATTACK_TWO,
 	ATTACK_THREE,
+	STUN,
 	PLAYER_DIED,
 }
 
@@ -75,6 +76,8 @@ class StateMachine extends Node:
 
 	func trigger_event(event: Events) -> void:
 		if not current_state in transitions:
+			return
+		if current_state.has_method("should_ignore_event") and current_state.should_ignore_event(event):
 			return
 		if not transitions[current_state].has(event):
 			print_debug(
@@ -149,7 +152,9 @@ class StateIdle extends State :
 		super("Idle" , init_mob)
 	
 	func enter():
-		mob.mob_sprite.play("idle")
+		mob.mob_sprite.visible = true
+		mob.control.visible = false
+		mob.collision_shape_2d.disabled = false
 	
 	func update(delta) -> Events :
 		return Events.NONE
@@ -158,12 +163,15 @@ class StateIdle extends State :
 class StateCombat extends State :
 	
 	var events_attack := [Events.ATTACK_ONE , Events.ATTACK_TWO , Events.ATTACK_THREE ]
-	var wait_time := 1.5
+	var wait_time := 0.5
 	var timer := 0.0
 	
 	func _init(init_mob : Mob ) -> void:
 		super("Combat" , init_mob)
 	
+	func enter():
+		mob.control.visible = true
+		mob.collision_shape_2d.disabled = true
 	
 	func update(delta) -> Events :
 		
@@ -195,7 +203,8 @@ class StateStagger extends State :
 			return Events.FINISHED
 		
 		return Events.NONE
-	
+	func should_ignore_event(event: Events) -> bool:
+		return event == Events.STUN
 	func exit() :
 		await mob.get_tree().create_timer(0.5).timeout
 		mob.mob_sprite.material.set_shader_parameter("is_flashing" , false)
@@ -211,13 +220,14 @@ class StateStagger extends State :
 
 class StateDie extends State :
 	
-	func _init(init_mob : Mob) -> void :
+	func _init(init_mob : Mob ) -> void :
 		super("Die" , init_mob)
 	
 	func enter():
 		mob.mob_sprite.visible = !mob.mob_sprite.visible
 		mob.die_smoke.visible = !mob.die_smoke.visible
 		mob.die_smoke.play("pooof")
+		mob.is_defeated = true
 		mob.die_smoke.animation_finished.connect(finish)
 
 	func exit():
@@ -225,4 +235,19 @@ class StateDie extends State :
 		mob.die_smoke.animation_finished.disconnect(finish)
 
 	func finish() -> void :
+		Global.mob_died.emit()
+
+
+class StateStun extends State :
+	
+	func _init(init_mob : Mob) -> void :
+		super("Stunned" , init_mob)
+	
+	func enter():
+		mob.stun_sfx.play()
+		mob.stun_vfx.visible = true
+		await mob.get_tree().create_timer(2.5).timeout
 		finished.emit()
+
+	func exit():
+		mob.stun_vfx.visible = false

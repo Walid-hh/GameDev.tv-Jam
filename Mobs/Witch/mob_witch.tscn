@@ -1,8 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://mkmhd4gdlu4r"]
+[gd_scene load_steps=12 format=3 uid="uid://mkmhd4gdlu4r"]
 
 [ext_resource type="PackedScene" uid="uid://hjiocyyjbqt2" path="res://Mobs/mob_base.tscn" id="1_3qnat"]
 [ext_resource type="Script" uid="uid://ckggxupi1cpy1" path="res://Mobs/Witch/mob_witch.gd" id="2_k5efk"]
 [ext_resource type="Texture2D" uid="uid://pdh2rfc10or7" path="res://Assets/Characters/Battle Sprites/Monster Pack Files/spritesheets/witch.png" id="3_8kacw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k5efk"]
+size = Vector2(43, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t3pa3"]
 atlas = ExtResource("3_8kacw")
@@ -52,27 +55,33 @@ size = Vector2(64, 56)
 
 [node name="MobWitch" instance=ExtResource("1_3qnat")]
 script = ExtResource("2_k5efk")
-max_health = 1
-max_stagger_health = 10
+max_stagger_health = 40
 
-[node name="MobSprite" parent="." index="0"]
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2(1.5, 13)
+shape = SubResource("RectangleShape2D_k5efk")
+
+[node name="MobSprite" parent="." index="1"]
 sprite_frames = SubResource("SpriteFrames_a2hmg")
 animation = &"idle"
 autoplay = "idle"
 frame_progress = 0.433612
+
+[node name="StunVFX" parent="." index="2"]
+frame_progress = 0.305213
 
 [node name="CollisionShape2D2" parent="HurtBox2D" index="0"]
 position = Vector2(0, -20)
 shape = SubResource("RectangleShape2D_3qnat")
 debug_color = Color(0.085554, 0.648035, 0.0886732, 0.42)
 
-[node name="DebugLabel" parent="." index="4"]
+[node name="DebugLabel" parent="." index="6"]
 offset_left = -16.0
 offset_top = -48.0
 offset_right = 48.0
 offset_bottom = -25.0
 
-[node name="DieSmoke" parent="." index="5"]
+[node name="DieSmoke" parent="." index="7"]
 frame = 0
 frame_progress = 0.0
 

@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://drwggcvxrl77t"]
+
+[ext_resource type="Script" uid="uid://dhpm55liwjtti" path="res://Mobs/Plant/PlantAttacks/poison_rain.gd" id="1_uqmi3"]
+[ext_resource type="Script" uid="uid://cvr4ed4ss8x4c" path="res://Common/Scripts/hit_box.gd" id="2_h6ceg"]
+[ext_resource type="Texture2D" uid="uid://bwkxepd1drtml" path="res://Assets/bubble.png" id="3_ao2kf"]
+[ext_resource type="AudioStream" uid="uid://cc6a4f86p6t8m" path="res://Assets/Music And SFX/sfx/bubble.wav" id="4_h6ceg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_awt48"]
+radius = 18.0278
+
+[node name="BubbleAttack" type="Node2D"]
+script = ExtResource("1_uqmi3")
+x_offset = 8.0
+
+[node name="HitBox2D" type="Area2D" parent="."]
+scale = Vector2(0.5, 0.5)
+collision_layer = 2
+script = ExtResource("2_h6ceg")
+damage = 2
+damage_source = 2
+detected_hurtboxes = 1
+metadata/_custom_type_script = "uid://cvr4ed4ss8x4c"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox2D"]
+shape = SubResource("CircleShape2D_awt48")
+debug_color = Color(0.855956, 0.00780421, 0.281333, 0.42)
+
+[node name="Sprite2D" type="Sprite2D" parent="HitBox2D"]
+texture = ExtResource("3_ao2kf")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_h6ceg")
+volume_db = -20.0
+autoplay = true
+bus = &"Sfx"

@@ -1,0 +1,79 @@
+[gd_scene load_steps=13 format=3 uid="uid://flxuip5opyi1"]
+
+[ext_resource type="PackedScene" uid="uid://hjiocyyjbqt2" path="res://Mobs/mob_base.tscn" id="1_isaei"]
+[ext_resource type="Texture2D" uid="uid://dng5prcvxmbnc" path="res://Assets/Characters/Battle Sprites/Living Pack 1/Frog/Frog-sheet.png" id="2_8q8ji"]
+[ext_resource type="Script" uid="uid://cyhya1viyi61q" path="res://Mobs/Frog/mob_frog.gd" id="2_s8vdx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8q8ji"]
+size = Vector2(56, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s8vdx"]
+atlas = ExtResource("2_8q8ji")
+region = Rect2(0, 0, 63, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_63be2"]
+atlas = ExtResource("2_8q8ji")
+region = Rect2(63, 0, 63, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b6f2h"]
+atlas = ExtResource("2_8q8ji")
+region = Rect2(126, 0, 63, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_81sx7"]
+atlas = ExtResource("2_8q8ji")
+region = Rect2(189, 0, 63, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ycxbp"]
+atlas = ExtResource("2_8q8ji")
+region = Rect2(252, 0, 63, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o7qfe"]
+atlas = ExtResource("2_8q8ji")
+region = Rect2(315, 0, 63, 68)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fymol"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s8vdx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_63be2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b6f2h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_81sx7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ycxbp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o7qfe")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 6.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ibp5x"]
+size = Vector2(80, 64)
+
+[node name="MobFrog" instance=ExtResource("1_isaei")]
+script = ExtResource("2_s8vdx")
+max_health = 2
+
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2(-4, 16)
+shape = SubResource("RectangleShape2D_8q8ji")
+
+[node name="MobSprite" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_fymol")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D2" parent="HurtBox2D" index="0"]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_ibp5x")
+debug_color = Color(0.0862745, 0.647059, 0.0901961, 0.419608)

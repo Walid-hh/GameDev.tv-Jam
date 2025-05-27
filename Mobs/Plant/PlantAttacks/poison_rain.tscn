@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqw5e8p8p2j2c"]
+
+[ext_resource type="Script" uid="uid://dhpm55liwjtti" path="res://Mobs/Plant/PlantAttacks/poison_rain.gd" id="1_itgsm"]
+[ext_resource type="PackedScene" uid="uid://dn3tm68o48qyw" path="res://Mobs/Projectiles/fire_green.tscn" id="2_d7my7"]
+[ext_resource type="AudioStream" uid="uid://btqvlbux6qinp" path="res://Assets/Music And SFX/sfx/DSGNImpt_EXPLOSION-Fire Hit_HY_PC-003.wav" id="3_1137h"]
+
+[node name="PoisonRain" type="Node2D"]
+script = ExtResource("1_itgsm")
+
+[node name="FireGreen" parent="." instance=ExtResource("2_d7my7")]
+damage = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_1137h")
+volume_db = -20.0
+autoplay = true

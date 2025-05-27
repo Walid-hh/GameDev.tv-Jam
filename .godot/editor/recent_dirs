@@ -1,16 +1,21 @@
-res://Mobs/Attacks
-res://Mobs/Attacks/Projectiles
-res://Assets/VFX
+C:/Users/walid/OneDrive/Bureau/MakeGames/GameDevTVJamBuild
+res://Common/Scripts
+res://UI
+res://Levels
 res://Mobs/Plant
-res://Assets/Characters/Battle Sprites/Monster Pack Files/spritesheets
+res://Mobs/Witch
+res://Mobs/Frog
+res://Assets
+res://Assets/VFX
+res://Mobs/Frog/FrogAttacks
+res://Mobs/Plant/PlantAttacks
+res://Assets/Characters/Battle Sprites/Living Pack 1/Frog
 res://Mobs
+res://Assets/Characters/Battle Sprites/Monster Pack Files/spritesheets
 res://Assets/DG Asha Character
 res://Player
 res://Common/Themes
 res://Common/Shaders
-res://Tests
-res://Assets
 res://Player/Weapons
 res://Player/Projectiles
 res://Common
-res://Levels

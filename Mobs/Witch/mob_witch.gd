@@ -1,18 +1,18 @@
 class_name MobWitch extends Mob
 
-var circular_attack_scene := preload("res://Mobs/Attacks/circular_attack.tscn")
-var aoe_attack_scene := preload("res://Mobs/Attacks/aoe_attack.tscn")
-var fire_arrow_attack_scene := preload("res://Mobs/Attacks/fire_arrow.tscn")
+var circular_attack_scene := preload("res://Mobs/Witch/WitchAttacks/circular_attack.tscn")
+var aoe_attack_scene := preload("res://Mobs/Witch/WitchAttacks/aoe_attack.tscn")
+var fire_arrow_attack_scene := preload("res://Mobs/Witch/WitchAttacks/fire_arrow.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super()
 	setup_state_machine()
-	var combat_start_timer := Timer.new()
-	add_child(combat_start_timer)
-	combat_start_timer.start(3)
-	combat_start_timer.one_shot = true
-	combat_start_timer.timeout.connect(func() -> void :
-		state_machine.trigger_event(WitchStates.Events.COMBAT_STARTED))
+	#var combat_start_timer := Timer.new()
+	#add_child(combat_start_timer)
+	#combat_start_timer.start(3)
+	#combat_start_timer.one_shot = true
+	#combat_start_timer.timeout.connect(func() -> void :
+		#state_machine.trigger_event(WitchStates.Events.COMBAT_STARTED))
 
 func setup_state_machine():
 	state_machine = WitchStates.StateMachine.new()
@@ -23,6 +23,7 @@ func setup_state_machine():
 	var attack_two := WitchStates.StateAoeAttack.new(self , aoe_attack_scene)
 	var attack_three := WitchStates.StateFireArrow.new(self , fire_arrow_attack_scene)
 	var stagger := WitchStates.StateStagger.new(self)
+	var stun := WitchStates.StateStun.new(self)
 	var die := WitchStates.StateDie.new(self)
 	state_machine.transitions = {
 		idle :{
@@ -31,6 +32,7 @@ func setup_state_machine():
 		stagger :{
 			WitchStates.Events.FINISHED : combat,
 		},
+
 		combat :{
 			WitchStates.Events.FINISHED : idle,
 			WitchStates.Events.ATTACK_ONE : attack_one,
@@ -48,10 +50,14 @@ func setup_state_machine():
 		},
 		die :{
 			WitchStates.Events.FINISHED : idle,
-		}
+		},
+		stun :{
+			WitchStates.Events.FINISHED : combat
+		},
 	}
+	state_machine.add_transition_to_all_states(WitchStates.Events.STUN , stun)
 	state_machine.add_transition_to_all_states(WitchStates.Events.STAGGER_HEALTH_DEPLETED , stagger)
 	state_machine.add_transition_to_all_states(WitchStates.Events.PLAYER_DIED , idle)
 	state_machine.add_transition_to_all_states(WitchStates.Events.HEALTH_DEPLETED , die)
-	state_machine.activate(idle)
-	state_machine.is_debugging = true
+	state_machine.activate(combat)
+	state_machine.is_debugging = false
